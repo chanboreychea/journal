@@ -2,6 +2,33 @@
 
 @section('title', 'ប្រភេទ')
 
+@section('message')
+    @if ($message = Session::get('message'))
+        <div class="toast show success-alert" style="position: absolute;top:0x;right:0px;z-index:9999" id="success-alert">
+            <div class="toast-header">
+                <strong class="me-auto">ការជូនដំណឹង</strong>
+            </div>
+            <div class="toast-body text-success">
+                <b>{{ $message }}</b>
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="toast show success-alert" style="position: absolute;top:0x;right:0px;z-index:9999" id="success-alert">
+            <div class="toast-header">
+                <strong class="me-auto">ការជូនដំណឹង</strong>
+            </div>
+            <div class="toast-body text-success">
+                @foreach ($errors->all() as $error)
+                    <li class="text-danger">{{ $error }}</li>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+@endsection
+
 @section('contents')
     <div class="row">
         <div class="col">
@@ -84,9 +111,9 @@
                                                                     <div class="form-group col-6">
                                                                         <label for="frist_name">ឈ្មោះប្រភេទ</label>
                                                                         <input id="frist_name" type="text"
-                                                                            class="form-control" value="{{ $item->name }}"
-                                                                            name="categoryName" placeholder="ឈ្មោះ"
-                                                                            autofocus>
+                                                                            class="form-control"
+                                                                            value="{{ $item->name }}" name="categoryName"
+                                                                            placeholder="ឈ្មោះ" autofocus>
                                                                     </div>
                                                                     <div class="form-group col-6">
                                                                         <label for="last_name">សកម្មភាព</label>

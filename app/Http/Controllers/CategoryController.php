@@ -44,7 +44,7 @@ class CategoryController extends Controller
                 'status' => Status::APPROVE,
                 'isActive' => Active::ACTIVE
             ]);
-            return redirect('/categories')->with('message', '');
+            return redirect('/categories')->with('message', 'ការរក្សាទុកទទួលបានជោគជ័យ');
         } catch (Exception $e) {
             return redirect()->back()->with('message', 'Please try again!!!');
         }
@@ -75,7 +75,7 @@ class CategoryController extends Controller
                 'isActive' => $isActive
             ]);
 
-            return redirect('/categories')->with('message', '');
+            return redirect()->back()->with('message', 'ការធ្វើ​បច្ចុប្បន្នភាពទទួលបានជោគជ័យ');
         } catch (Exception $e) {
             return redirect()->back()->with('message', 'Please try again!!!');
         }
@@ -84,6 +84,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->back()->with('message', 'ជោគជ័យ');
+        return redirect()->back()->with('message', 'ការលុបទទួលបានជោគជ័យ');
     }
 }

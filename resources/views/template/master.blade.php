@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 
     <script>
@@ -32,9 +36,67 @@
         gtag('config', 'UA-94034622-3');
     </script>
 
+    <style>
+        .toast {
+            position: absolute;
+            width: 350px;
+            max-width: 100%;
+            font-size: 0.875rem;
+            pointer-events: auto;
+            background-color: rgba(255, 255, 255, 0.85);
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.25rem;
+        }
+
+        .toast:not(.showing):not(.show) {
+            opacity: 0;
+        }
+
+        .toast.hide {
+            display: none;
+        }
+
+        .toast-container {
+            width: -webkit-max-content;
+            width: -moz-max-content;
+            width: max-content;
+            max-width: 100%;
+            pointer-events: none;
+        }
+
+        .toast-container> :not(:last-child) {
+            margin-bottom: 0.75rem;
+        }
+
+        .toast-header {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            color: #6c757d;
+            background-color: rgba(255, 255, 255, 0.85);
+            background-clip: padding-box;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-top-left-radius: calc(0.25rem - 1px);
+            border-top-right-radius: calc(0.25rem - 1px);
+        }
+
+        .toast-header .btn-close {
+            margin-right: -0.375rem;
+            margin-left: 0.75rem;
+        }
+
+        .toast-body {
+            padding: 0.75rem;
+            word-wrap: break-word;
+        }
+    </style>
+
 </head>
 
 <body>
+    @yield('message')
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
@@ -64,6 +126,7 @@
                             </a>
                         </div>
                     </li>
+
                 </ul>
             </nav>
             <div class="main-sidebar sidebar-style-2">
@@ -270,6 +333,12 @@
 
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script>
+        $('#success-alert, #error-alert').fadeIn('slow');
+        setTimeout(function() {
+            $('#success-alert, #error-alert').fadeOut('slow');
+        }, 5000);
+    </script>
 </body>
 
 </html>

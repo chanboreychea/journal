@@ -2,6 +2,19 @@
 
 @section('title', 'ប្រភេទ')
 
+@section('message')
+    @if ($message = Session::get('message'))
+        <div class="toast show success-alert" style="position: absolute;top:0x;right:0px;z-index:9999" id="success-alert">
+            <div class="toast-header">
+                <strong class="me-auto">ការជូនដំណឹង</strong>
+            </div>
+            <div class="toast-body text-success">
+                <b>{{ $message }}</b>
+            </div>
+        </div>
+    @endif
+@endsection
+
 @section('contents')
     <div class="row">
         <div class="col">
