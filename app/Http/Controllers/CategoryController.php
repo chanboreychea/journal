@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all()->where('isActive', Active::ACTIVE);
+        $categories = Category::all();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'categoryName' => ['required', 'min:2', 'max:100', Rule::unique('categories', 'name')->whereNot('id', $category)],
-            'description' => 'max:255'
+            'description' => 'max:255',
         ], [
             'categoryName.required' => 'សូមបញ្ចូលនូវឈ្មោះប្រភេទ',
             'categoryName.unique' => 'ឈ្មោះប្រភេទមានរួចហើយ',
@@ -66,12 +66,13 @@ class CategoryController extends Controller
         try {
             $name = $request->input('categoryName');
             $description = $request->input('description');
+            $isActive = $request->input('isActive');
 
             $category->update([
                 'name' => $name,
                 'description' => $description,
                 'status' => Status::APPROVE,
-                'isActive' => Active::ACTIVE
+                'isActive' => $isActive
             ]);
 
             return redirect('/categories')->with('message', '');

@@ -34,8 +34,10 @@
 
                                         @if ($item->isActive == 1)
                                             <td class="text-success">សកម្ម</td>
-                                        @else
+                                        @elseif ($item->isActive == 2)
                                             <td class="text-danger">អសកម្ម</td>
+                                        @else
+                                            <td class="text-primary">រងចាំ</td>
                                         @endif
 
                                         <td class="d-flex">
@@ -85,21 +87,31 @@
                                                                             class="form-control" value="{{ $item->name }}"
                                                                             name="categoryName" placeholder="ឈ្មោះ"
                                                                             autofocus>
-                                                                        @error('categoryName')
-                                                                            <span
-                                                                                class="text-danger">{{ $message }}</span>
-                                                                        @enderror
                                                                     </div>
                                                                     <div class="form-group col-6">
-                                                                        <label for="last_name">មតិ <span
+                                                                        <label for="last_name">សកម្មភាព</label>
+                                                                        <select name="isActive" class="form-control"
+                                                                            id="last_name">
+                                                                            @if ($item->isActive == 1)
+                                                                                <option value="1" selected>សកម្ម
+                                                                                </option>
+                                                                            @elseif ($item->isActive == 2)
+                                                                                <option value="2" selected>អសកម្ម
+                                                                                </option>
+                                                                            @else
+                                                                                <option value="3">រងចាំ</option>
+                                                                            @endif
+                                                                            <option value="1">សកម្ម</option>
+                                                                            <option value="2">អសកម្ម</option>
+                                                                            <option value="3">រងចាំ</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-12">
+                                                                        <label for="last_name">មតិ<span
                                                                                 class="text-danger"><b>*</b></span></label>
                                                                         <input id="last_name" type="text"
                                                                             value="{{ $item->description }}"
                                                                             class="form-control" name="description">
-                                                                        @error('description')
-                                                                            <span
-                                                                                class="text-danger">{{ $message }}</span>
-                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
