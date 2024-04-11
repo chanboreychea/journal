@@ -149,14 +149,13 @@
                             <a href="#" class="nav-link has-dropdown"><i
                                     class="fas fa-fire"></i><span>មុខងារ</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="/revenues">ចំណូល</a></li>
-                                <li><a class="nav-link" href="/expenses">ចំណាយ</a></li>
+                                <li><a class="nav-link" href="/revenues/create">ចំណូល</a></li>
+                                <li><a class="nav-link" href="/expenses/create">ចំណាយ</a></li>
                                 <li><a class="nav-link" href="/journals">ទិនានុប្បវត្តិ</a></li>
                                 <li><a class="nav-link" href="/ledgers">សៀវភៅកត់ត្រា</a></li>
                             </ul>
                         </li>
                     </ul>
-
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
                         <a href="/admins/logout" class="btn btn-primary btn-lg btn-block btn-icon-split text-danger">
                             <i class="fas fa-sign-out-alt"></i> <span class="text-light">ចាកចេញ</span>
@@ -313,6 +312,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
     <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/modules/popper.js') }}"></script>
     <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
@@ -333,11 +333,12 @@
 
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/fom') }}"></script>
     <script>
         $('#success-alert, #error-alert').fadeIn('slow');
         setTimeout(function() {
             $('#success-alert, #error-alert').fadeOut('slow');
-        }, 5000);
+        }, 8000);
     </script>
 </body>
 

@@ -24,7 +24,7 @@ class AuthController extends Controller
             $request->session()->pull('is_admin_logged_in');
             $request->session()->pull('admin_id');
             session(['is_admin_logged_in' => true, 'admin_id' => "B0r3y!19"]);
-            return redirect('/revenues');
+            return redirect('/journals');
         }
         return Redirect::route('admin-login');
     }

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('revenues', function (Blueprint $table) {
+        Schema::create('revenue_details', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('noFsa');
-            $table->string('orderReference');
-            $table->date('dateOfBankIncomeCard')->nullable();
-            $table->string('bank')->nullable();
-            $table->string('file')->nullable();
+            $table->foreignId('revenueId')->constrained('revenues')->onDelete('cascade');
+            $table->string('regulatorName', 100);
+            $table->float('amountDolla')->nullable();
+            $table->float('amountRiel')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('revenues');
+        Schema::dropIfExists('revenue_details');
     }
 };

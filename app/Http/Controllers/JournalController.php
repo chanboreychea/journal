@@ -12,7 +12,7 @@ class JournalController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.journal.index');
     }
 
     /**
