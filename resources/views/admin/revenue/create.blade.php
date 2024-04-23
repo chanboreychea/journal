@@ -43,20 +43,22 @@
                     </div>
                 </div>
                 <div class="card-body pe-5">
-                    <form method="POST" action="/revenues" id="formAuthentication">
+                    <form method="POST" action="/revenues" id="formAuthentication" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
                             <div class="form-group col-4">
                                 <label for="frist_name">កាលបរិច្ឆេទ</label>
-                                <input id="frist_name" type="date" class="form-control" name="date" required>
+                                <input id="frist_name" type="date" value="{{ old('date') }}" class="form-control"
+                                    name="date" required>
                                 {{-- @error('date')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
                             <div class="form-group col-4">
                                 <label for="last_name">លេខលិខិត អ.ស.ហ</label>
-                                <input id="last_name" type="text" class="form-control" name="noFsa" autofocus required>
+                                <input id="last_name" type="text" class="form-control" name="noFsa"
+                                    value="{{ old('noFsa') }}" autofocus required>
                                 {{-- @error('noFsa')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
@@ -65,12 +67,11 @@
                             <div class="form-group col-4">
                                 <label for="last_name">ឯកសារយោង</label>
                                 <div class="custom-file">
-                                    <input type="file" name="file" class="custom-file-input" id="customFile">
+                                    <input type="file" name="fileReference" class="custom-file-input" id="customFile">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
-
-
-                                {{-- @error('noFsa')
+                                {{-- <input type="file" name="fileReference"> --}}
+                                {{-- @error('fileReference')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
@@ -80,7 +81,8 @@
                         <div class="row">
                             <div class="form-group col-4">
                                 <label for="last_name">ល.រ ដីកាអម</label>
-                                <input id="last_name" type="text" class="form-control" name="orderReference" required>
+                                <input id="last_name" type="text" class="form-control" name="orderReference"
+                                    value="{{ old('orderReference') }}" required>
                                 {{-- @error('orderReference')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
@@ -88,11 +90,13 @@
                             <div class="form-group col-4">
                                 <label for="frist_name">កាលបរិច្ឆេទ ប័ណ្ណចំណូលនៅធនាគារ<span
                                         class="text-danger"><b>*</b></span></label>
-                                <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard">
+                                <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard"
+                                    value="{{ old('dateOfBankIncomeCard') }}">
                             </div>
                             <div class="form-group col-4">
                                 <label for="bank">ABA<span class="text-danger"><b>*</b></span></label>
-                                <input id="bank" type="text" class="form-control" name="bank" placeholder="ABA">
+                                <input id="bank" type="text" class="form-control" name="bank"
+                                    value="{{ old('bank') }}" placeholder="ABA">
                                 @error('bank')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
