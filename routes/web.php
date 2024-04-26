@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\AccountType;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -24,4 +25,10 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('/journals', JournalController::class);
     Route::resource('/ledgers', LedgerController::class);
     // Route::resource('/users', UserController::class);
+});
+
+Route::get('/accountType', function () {
+    $acc = AccountType::ACCOUNT_TYPE;
+    $assetsAccountName = $acc['Assets']['accountName'];
+    return view('accountType', compact('acc'));
 });
