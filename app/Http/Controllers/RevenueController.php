@@ -77,6 +77,8 @@ class RevenueController extends Controller
                 'file' => $filename
             ]);
 
+            $totalAmountDolla = 0;
+            $totalAmountRiel = 0;
             foreach ($regulatorName as $key => $item) {
                 $revenues[] = [
                     'revenueId' => $revenue->id,
@@ -85,7 +87,15 @@ class RevenueController extends Controller
                     'amountRiel' => $currencyAmountRiel[$key],
                     'created_at' => Carbon::now(),
                 ];
+                $totalAmountDolla += $currencyAmountDolla[$key];
+                $totalAmountRiel += $currencyAmountRiel[$key];
             }
+
+            Revenue::where('id', $revenue->id)->update([
+                'totalAmountDolla' => $totalAmountDolla,
+                'totalAmountRiel' => $totalAmountRiel,
+            ]);
+            
             //insert to revenue detail
             RevenueDetail::insert($revenues);
 

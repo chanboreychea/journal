@@ -35,11 +35,12 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-header-action">
-                        <a href="/journals" class="btn btn-danger">
+                        <a href="/journals" class="btn btn-primary">
                             <i class="fas fa-chevron-left"></i>ទិនានុប្បវត្តិ
                         </a>
-                        <button type="button" id="addInput" class="btn btn-primary"
+                        <button type="button" id="addInput" class="btn btn-success"
                             onclick="addInput()">ប្រភពចំណូល</button>
+                        <button type="button" id="removeInput" class="d-none" onclick="removeInput()">ដកប្រភពចំណូល</button>
                     </div>
                 </div>
                 <div class="card-body pe-5">
@@ -132,15 +133,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <div id="regulator"></div>
-                            </div>
-                            <div class="form-group col-6 d-flex justify-content-between">
-                                <div id="amountDolla" class="w-100 mr-2"></div>
-                                <div id="amountRiel" class="w-100"></div>
-                            </div>
-                        </div>
+                        <div id="container"></div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -154,31 +147,28 @@
     </div>
     <script>
         var regulators = {!! json_encode($regulators) !!};
-        console.log(regulators.length)
+        // console.log(regulators.length)
         var btnAddInput = document.getElementById("addInput");
+        var btnRemoveInput = document.getElementById("removeInput");
 
         function addInput() {
 
             var amount = document.createElement("input");
             amount.type = "text";
-            amount.classList.add("form-control");
-            amount.classList.add("amountDolla");
-            amount.name = "amountDolla[]"; // You can set the name dynamically if needed
+            amount.className = "form-control amountDolla";
+            amount.name = "amountDolla[]";
             amount.placeholder = "ចំនួនទឹកប្រាក់";
             amount.pattern = "[0-9]+(\.[0-9]+)?";
-            // amount.required = true;
 
             var label = document.createElement("label");
             label.innerHTML = "ប្រាក់ដុល្លា";
 
             var amountriel = document.createElement("input");
             amountriel.type = "text";
-            amountriel.classList.add("form-control");
-            amountriel.classList.add("amountRiel");
-            amountriel.name = "amountRiel[]"; // You can set the name dynamically if needed
+            amountriel.className = "form-control amountRiel";
+            amountriel.name = "amountRiel[]";
             amountriel.placeholder = "ចំនួនទឹកប្រាក់";
             amountriel.pattern = "[0-9]+(\.[0-9]+)?";
-            // amountriel.required = true;
 
             var labelr = document.createElement("label");
             labelr.innerHTML = "ប្រាក់រៀល";
@@ -198,20 +188,56 @@
             var labelSelectInput = document.createElement("label");
             labelSelectInput.innerHTML = "ឈ្មោះនិយ័តករ";
 
-            var currencyAmountR = document.getElementById("amountRiel");
-            currencyAmountR.appendChild(labelr);
-            currencyAmountR.appendChild(amountriel);
-            currencyAmountR.appendChild(document.createElement("br"));
+            var container = document.getElementById('container');
+            // container.className = 'container w-100 p-0 m-0';
+            var row = document.createElement('div');
+            row.className = 'row items';
 
-            var currencyAmount = document.getElementById("amountDolla");
-            currencyAmount.appendChild(label);
-            currencyAmount.appendChild(amount);
-            currencyAmount.appendChild(document.createElement("br"));
+            var colRight = document.createElement('div');
+            colRight.className = 'form-group col-6';
 
-            var regulator = document.getElementById("regulator");
-            regulator.appendChild(labelSelectInput);
-            regulator.appendChild(selectInput);
-            regulator.appendChild(document.createElement("br"));
+            colRight.appendChild(labelSelectInput);
+            colRight.appendChild(selectInput);
+
+            var colLeft = document.createElement('div');
+            colLeft.className = 'form-group col-6 d-flex justify-content-between';
+
+            var colLeftDolla = document.createElement('div');
+            colLeftDolla.className = "w-100 mr-2"
+            colLeftDolla.appendChild(label);
+            colLeftDolla.appendChild(amount);
+
+            var colLeftRiel = document.createElement('div');
+            colLeftRiel.className = "w-100"
+            colLeftRiel.appendChild(labelr);
+            colLeftRiel.appendChild(amountriel);
+
+            colLeft.appendChild(colLeftDolla);
+            colLeft.appendChild(colLeftRiel);
+
+            row.appendChild(colRight);
+            row.appendChild(colLeft);
+            container.appendChild(row);
+
+            const childCount = container.childElementCount;
+            console.log(`items ${childCount}`);
+            if (childCount > 0) {
+                btnRemoveInput.className = "btn btn-danger d-block";
+            }
+            // var elementsToRemove = container.getElementsByClassName('items');
+            // var btnRemove = container.getElementsByClassName('removeItems');
+
+        }
+
+
+
+        function removeInput() {
+            container.removeChild(container.lastChild);
+            const childCountd = container.childElementCount;
+            console.log(`items ${childCountd}`);
+            if (childCountd <= 0) {
+                btnRemoveInput.className = "d-none";
+            }
         }
 
         // $(document).ready(function() {

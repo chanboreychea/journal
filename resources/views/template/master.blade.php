@@ -333,7 +333,7 @@
 
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/fom') }}"></script>
+    <script src="{{ asset('assets/js/form') }}"></script>
     <script>
         $('#success-alert, #error-alert').fadeIn('slow');
         setTimeout(function() {
