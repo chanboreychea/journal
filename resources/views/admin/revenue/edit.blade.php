@@ -107,10 +107,11 @@
                         </div>
 
                         @foreach ($revenueDetail as $index => $rd)
+                            <input type="hidden" name="updateRevenueDetailId[]" value="{{ $rd->id }}">
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label>ឈ្មោះនិយ័តករ</label>
-                                    <select name="regulatorName[]" class="form-control regulatorName">
+                                    <select name="updateRegulatorName[]" class="form-control regulatorName">
                                         <option value="{{ $rd->regulatorName }}">{{ $rd->regulatorName }}</option>
                                         @foreach ($regulators as $item)
                                             @if ($item != $rd->regulatorName)
@@ -123,18 +124,18 @@
                                     <div class="w-100 mr-2">
                                         <label>ប្រាក់ដុល្លា</label>
                                         <input type="text" value="{{ $rd->amountDolla }}"
-                                            class="form-control amountDolla" name="amountDolla[]"
+                                            class="form-control amountDolla" name="updateAmountDolla[]"
                                             placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
-                                        @error('amountDolla')
+                                        @error('updateAmountDolla')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="w-100">
                                         <label>ប្រាក់រៀល</label>
                                         <input type="text" value="{{ $rd->amountRiel }}"
-                                            class="form-control amountRiel" name="amountRiel[]"
+                                            class="form-control amountRiel" name="updateAmountRiel[]"
                                             placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
-                                        @error('amountRiel')
+                                        @error('updateAmountRiel')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
