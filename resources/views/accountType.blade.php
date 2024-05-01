@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    @foreach ($acc as $accountType => $items)
+    <x-forms.accountType :data="$acc" />
+    <br>
+    {{-- @foreach ($acc as $accountType => $items)
         <ul>
             <li>{{ $accountType }}</li>
             @foreach ($items as $item => $accountName)
@@ -21,7 +23,7 @@
                 </ul>
             @endforeach
         </ul>
-    @endforeach
+    @endforeach --}}
 </body>
 
 </html>
