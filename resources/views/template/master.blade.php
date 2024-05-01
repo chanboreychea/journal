@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -105,28 +106,26 @@
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars"></i></a></li>
-
                     </ul>
                 </div>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"
+                    <li class="dropdown show">
+                        <a href="/" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/admin.jpg') }}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">លោក​ ថៅ គីមរ៉ុង</div>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
+                        {{-- <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in 5 min ago</div>
-                            {{-- <a href="features-profile.html" class="dropdown-item has-icon">
+                            <a href="features-profile.html" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
-                            </a> --}}
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="/admins/logout" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
-                        </div>
+                        </div> --}}
                     </li>
-
                 </ul>
             </nav>
             <div class="main-sidebar sidebar-style-2">
@@ -149,8 +148,8 @@
                             <a href="#" class="nav-link has-dropdown"><i
                                     class="fas fa-fire"></i><span>មុខងារ</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="/revenues/create">ចំណូល</a></li>
-                                <li><a class="nav-link" href="/expenses/create">ចំណាយ</a></li>
+                                <li><a class="nav-link" href="/revenues">ចំណូល</a></li>
+                                <li><a class="nav-link" href="/expenses">ចំណាយ</a></li>
                                 <li><a class="nav-link" href="/journals">ទិនានុប្បវត្តិ</a></li>
                                 <li><a class="nav-link" href="/ledgers">សៀវភៅកត់ត្រា</a></li>
                             </ul>

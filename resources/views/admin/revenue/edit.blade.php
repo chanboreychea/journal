@@ -45,13 +45,14 @@
                     </div>
                 </div>
                 <div class="card-body pe-5">
-                    <form method="POST" action="/revenues" id="formAuthentication" enctype="multipart/form-data">
+                    <form method="POST" action="/revenues/{{ $revenue->id }}" id="formAuthentication"
+                        enctype="multipart/form-data">
                         @csrf
-
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="row">
                             <div class="form-group col-4">
                                 <label for="frist_name">កាលបរិច្ឆេទ</label>
-                                <input id="frist_name" type="date" value="{{ old('date') }}" class="form-control"
+                                <input id="frist_name" type="date" value="{{ $revenue->date }}" class="form-control"
                                     name="date" required>
                                 {{-- @error('date')
                                     <span class="text-danger">{{ $message }}</span>
@@ -60,7 +61,7 @@
                             <div class="form-group col-4">
                                 <label for="last_name">លេខលិខិត អ.ស.ហ</label>
                                 <input id="last_name" type="text" class="form-control" name="noFsa"
-                                    value="{{ old('noFsa') }}" autofocus required>
+                                    value="{{ $revenue->noFsa }}" autofocus required>
                                 {{-- @error('noFsa')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
@@ -84,7 +85,7 @@
                             <div class="form-group col-4">
                                 <label for="last_name">ល.រ ដីកាអម</label>
                                 <input id="last_name" type="text" class="form-control" name="orderReference"
-                                    value="{{ old('orderReference') }}" required>
+                                    value="{{ $revenue->orderReference }}" required>
                                 {{-- @error('orderReference')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
@@ -93,52 +94,60 @@
                                 <label for="frist_name">កាលបរិច្ឆេទ ប័ណ្ណចំណូលនៅធនាគារ<span
                                         class="text-danger"><b>*</b></span></label>
                                 <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard"
-                                    value="{{ old('dateOfBankIncomeCard') }}">
+                                    value="{{ $revenue->dateOfBankIncomeCard }}">
                             </div>
                             <div class="form-group col-4">
                                 <label for="bank">ABA<span class="text-danger"><b>*</b></span></label>
                                 <input id="bank" type="text" class="form-control" name="bank"
-                                    value="{{ old('bank') }}" placeholder="ABA">
+                                    value="{{ $revenue->bank }}" placeholder="ABA">
                                 @error('bank')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label>ឈ្មោះនិយ័តករ</label>
-                                <select name="regulatorName[]" class="form-control regulatorName">
-                                    @foreach ($regulators as $item)
-                                        <option value="{{ $item }}">{{ $item }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-6 d-flex justify-content-between">
-                                <div class="w-100 mr-2">
-                                    <label>ប្រាក់ដុល្លា</label>
-                                    <input type="text" class="form-control amountDolla" name="amountDolla[]"
-                                        placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
-                                    @error('amountDolla')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                        @foreach ($revenueDetail as $index => $rd)
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>ឈ្មោះនិយ័តករ</label>
+                                    <select name="regulatorName[]" class="form-control regulatorName">
+                                        <option value="{{ $rd->regulatorName }}">{{ $rd->regulatorName }}</option>
+                                        @foreach ($regulators as $item)
+                                            @if ($item != $rd->regulatorName)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="w-100">
-                                    <label>ប្រាក់រៀល</label>
-                                    <input type="text" class="form-control amountRiel" name="amountRiel[]"
-                                        placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
-                                    @error('amountRiel')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <div class="form-group col-6 d-flex justify-content-between">
+                                    <div class="w-100 mr-2">
+                                        <label>ប្រាក់ដុល្លា</label>
+                                        <input type="text" value="{{ $rd->amountDolla }}"
+                                            class="form-control amountDolla" name="amountDolla[]"
+                                            placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
+                                        @error('amountDolla')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="w-100">
+                                        <label>ប្រាក់រៀល</label>
+                                        <input type="text" value="{{ $rd->amountRiel }}"
+                                            class="form-control amountRiel" name="amountRiel[]"
+                                            placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?">
+                                        @error('amountRiel')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+
 
                         <div id="container"></div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                រក្សាទុក
+                                ធ្វើបច្ចុប្បន្នភាព
                             </button>
                         </div>
                     </form>

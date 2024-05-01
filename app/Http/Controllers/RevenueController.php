@@ -17,6 +17,8 @@ class RevenueController extends Controller
      */
     public function index()
     {
+        $revenues = Revenue::all();
+        return view('admin.revenue.index', compact('revenues'));
     }
 
     /**
@@ -56,7 +58,7 @@ class RevenueController extends Controller
         if ($request->hasfile('fileReference')) {
             $file = $request->file('fileReference');
             $extenstion = $file->getClientOriginalExtension();
-            $filename = Str::random(30) . '.' . strval($extenstion);
+            $filename = Str::random(15) . '.' . strval($extenstion);
             $file->move('files/', $filename);
         } else {
             $filename = null;
@@ -95,15 +97,15 @@ class RevenueController extends Controller
                 'totalAmountDolla' => $totalAmountDolla,
                 'totalAmountRiel' => $totalAmountRiel,
             ]);
-            
+
             //insert to revenue detail
             RevenueDetail::insert($revenues);
 
             DB::commit();
-            return redirect('/journals')->with('message', 'ការបញ្ចូលបានជោគជ័យ​ សូមអរគុណ។');
+            return redirect('/revenues')->with('message', 'ការបញ្ចូលបានជោគជ័យ​ សូមអរគុណ។');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect('/journals')->with('message', 'សូមព្យាយាមម្ដងទៀត សូមអរគុណ។' . "$e");
+            return redirect('/revenues')->with('message', 'សូមព្យាយាមម្ដងទៀត សូមអរគុណ។' . "$e");
         }
     }
 
@@ -112,7 +114,8 @@ class RevenueController extends Controller
      */
     public function show(Revenue $revenue)
     {
-        //
+        $revenueDetail = RevenueDetail::where('revenueId', $revenue->id)->get();
+        return view('admin.revenue.show', compact('revenue', 'revenueDetail'));
     }
 
     /**
@@ -120,7 +123,9 @@ class RevenueController extends Controller
      */
     public function edit(Revenue $revenue)
     {
-        //
+        $regulators = Regulator::REGULATOR;
+        $revenueDetail = RevenueDetail::where('revenueId', $revenue->id)->get();
+        return view('admin.revenue.edit', compact('revenue', 'regulators', 'revenueDetail'));
     }
 
     /**
@@ -128,7 +133,8 @@ class RevenueController extends Controller
      */
     public function update(Request $request, Revenue $revenue)
     {
-
+        dd($revenue);
+        dd('love me like you do');
 
         if ($request->hasFile('img')) {
 
