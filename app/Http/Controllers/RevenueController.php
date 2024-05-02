@@ -50,7 +50,9 @@ class RevenueController extends Controller
         if ($request->hasfile('fileReference')) {
             $file = $request->file('fileReference');
             $extenstion = $file->getClientOriginalExtension();
-            $filename = Str::random(15) . '.' . strval($extenstion);
+            $originalFileName = $file->getClientOriginalName();
+            $pathInfo = pathinfo($originalFileName);
+            $filename = $pathInfo['filename'] . Str::random(10) . '.' . strval($extenstion);
             $file->move('files/', $filename);
         } else {
             $filename = null;
@@ -148,7 +150,9 @@ class RevenueController extends Controller
 
             $file = $request->file('fileReference');
             $extenstion = $file->getClientOriginalExtension();
-            $filename = Str::random(15) . '.' . strval($extenstion);
+            $originalFileName = $file->getClientOriginalName();
+            $pathInfo = pathinfo($originalFileName);
+            $filename = $pathInfo['filename'] . Str::random(10) . '.' . strval($extenstion);
             $file->move('files/', $filename);
             // 'upload image and delete old image'
             // $revenue->file = $filename;
