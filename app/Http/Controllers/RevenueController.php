@@ -223,6 +223,17 @@ class RevenueController extends Controller
 
     public function destroy(Revenue $revenue)
     {
-        //
+
+        if ($revenue->file) {
+            //find iamge file in public/images directory
+            if (file_exists(public_path('files/' . $revenue->file)))
+                unlink('files/' . $revenue->file);
+        }
+
+        $revenue->delete();
+
+        RevenueDetail::where('revenueId', $revenue->id)->delete();
+
+        return redirect('/revenues')->with('message', 'លុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
 }
