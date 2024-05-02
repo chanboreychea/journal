@@ -236,4 +236,10 @@ class RevenueController extends Controller
 
         return redirect('/revenues')->with('message', 'លុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
+
+    public function destroyRevenueDetailById(Request $request, string $rdID)
+    {
+        RevenueDetail::where('id', $rdID)->delete();
+        return redirect()->back()->with('message', 'លុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
+    }
 }

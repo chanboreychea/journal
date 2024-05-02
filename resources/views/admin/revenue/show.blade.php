@@ -80,9 +80,7 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label>ឈ្មោះនិយ័តករ</label>
-                                <select name="regulatorName[]" class="form-control regulatorName" disabled>
-                                    <option value="{{ $rd->regulatorName }}">{{ $rd->regulatorName }}</option>
-                                </select>
+                                <input type="text" value="{{ $rd->regulatorName }}" class="form-control" disabled>
                             </div>
                             <div class="form-group col-6 d-flex justify-content-between">
                                 <div class="w-100 mr-2">

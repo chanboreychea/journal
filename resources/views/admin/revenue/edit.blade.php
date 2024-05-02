@@ -109,7 +109,7 @@
                         @foreach ($revenueDetail as $index => $rd)
                             <input type="hidden" name="updateRevenueDetailId[]" value="{{ $rd->id }}">
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label>ឈ្មោះនិយ័តករ</label>
                                     <select name="updateRegulatorName[]" class="form-control regulatorName">
                                         <option value="{{ $rd->regulatorName }}">{{ $rd->regulatorName }}</option>
@@ -138,6 +138,34 @@
                                         @error('updateAmountRiel')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-2 ">
+                                    <label>ដកចេញ</label>
+                                    <button type="button" class="form-control btn btn-danger" data-toggle="modal"
+                                        data-target="#delete{{ $rd->id }}">លុប</button>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" tabindex="-1" role="dialog" id="delete{{ $rd->id }}">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">តើអ្នកយល់ព្រមលុបទេ?</h5>
+                                            </div>
+                                            <div class="modal-footer bg-whitesmoke br">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">ទេ</button>
+                                                <a href="/revenues/detail/{{ $rd->id }}"
+                                                    class="btn btn-primary">យល់ព្រម</a>
+                                                {{-- <form action="/revenues/{{ $rd->id }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn btn-primary">យល់ព្រម</button>
+                                                </form> --}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

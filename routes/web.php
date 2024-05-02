@@ -25,6 +25,8 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('/journals', JournalController::class);
     Route::resource('/ledgers', LedgerController::class);
     // Route::resource('/users', UserController::class);
+
+    Route::get('/revenues/detail/{rdID}', [RevenueController::class, 'destroyRevenueDetailById']);
 });
 
 Route::get('/accountType', function () {
