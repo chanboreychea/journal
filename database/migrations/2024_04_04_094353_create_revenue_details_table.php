@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('regulatorName', 100);
             $table->float('amountDolla')->nullable();
             $table->float('amountRiel')->nullable();
+            $table->double('totalAmountWithRate')->nullable();
             $table->timestamps();
         });
     }

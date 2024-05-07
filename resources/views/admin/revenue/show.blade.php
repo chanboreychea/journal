@@ -38,30 +38,34 @@
                         <a href="/revenues" class="btn btn-primary">
                             <i class="fas fa-chevron-left"></i>ចាកចេញ
                         </a>
-
                     </div>
                 </div>
                 <div class="card-body pe-5">
 
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="frist_name">កាលបរិច្ឆេទ</label>
                             <input id="frist_name" type="date" value="{{ $revenue->date }}" class="form-control"
                                 name="date" disabled>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="last_name">លេខលិខិត អ.ស.ហ</label>
                             <input id="last_name" type="text" class="form-control" name="noFsa"
                                 value="{{ $revenue->noFsa }}" disabled>
 
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="form-group col-4">
                             <label for="last_name">ល.រ ដីកាអម</label>
                             <input id="last_name" type="text" class="form-control" name="orderReference"
                                 value="{{ $revenue->orderReference }}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="frist_name">ភាគរយ</label>
+                            <input id="frist_name" type="number" value="{{ $revenue->rate }}" class="form-control"
+                                name="rate" disabled>
                         </div>
                         <div class="form-group col-4">
                             <label for="frist_name">កាលបរិច្ឆេទ ប័ណ្ណចំណូលនៅធនាគារ<span
@@ -78,23 +82,27 @@
 
                     @foreach ($revenueDetail as $index => $rd)
                         <div class="row">
-                            <div class="form-group col-6">
+                            <div class="form-group col-3">
                                 <label>ឈ្មោះនិយ័តករ</label>
-                                <input type="text" value="{{ $rd->regulatorName }}" class="form-control" disabled>
+                                @foreach ($regulators as $key => $item)
+                                    @if ($key == $rd->regulatorName)
+                                        <input type="text" value="{{ $item }}" class="form-control" disabled>
+                                    @endif
+                                @endforeach
                             </div>
-                            <div class="form-group col-6 d-flex justify-content-between">
-                                <div class="w-100 mr-2">
-                                    <label>ប្រាក់ដុល្លា</label>
-                                    <input type="text" value="{{ $rd->amountDolla }}" class="form-control amountDolla"
-                                        name="amountDolla[]" placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?"
-                                        disabled>
-                                </div>
-                                <div class="w-100">
-                                    <label>ប្រាក់រៀល</label>
-                                    <input type="text" value="{{ $rd->amountRiel }}" class="form-control amountRiel"
-                                        name="amountRiel[]" placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?"
-                                        disabled>
-                                </div>
+                            <div class="form-group col-3">
+                                <label>ប្រាក់សរុប</label>
+                                <input type="text" value="{{ $rd->totalAmountWithRate }}" class="form-control" disabled>
+                            </div>
+                            <div class="form-group col-3">
+                                <label>ប្រាក់ដុល្លា</label>
+                                <input type="text" value="{{ $rd->amountDolla }}" class="form-control amountDolla"
+                                    name="amountDolla[]" placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?" disabled>
+                            </div>
+                            <div class="form-group col-3">
+                                <label>ប្រាក់រៀល</label>
+                                <input type="text" value="{{ $rd->amountRiel }}" class="form-control amountRiel"
+                                    name="amountRiel[]" placeholder="ចំនួនទឹកប្រាក់" pattern="[0-9]+(\.[0-9]+)?" disabled>
                             </div>
                         </div>
                     @endforeach

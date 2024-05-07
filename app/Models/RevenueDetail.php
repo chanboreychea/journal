@@ -12,7 +12,7 @@ class RevenueDetail extends Model
     protected $table = 'revenue_details';
     protected $keyType = 'string';
     protected $fillable = [
-        'revenueId', 'regulatorName', 'amountDolla', 'amountRiel',
+        'revenueId', 'regulatorName', 'amountDolla', 'amountRiel', 'totalAmountWithRate'
     ];
 
     public function revenue()

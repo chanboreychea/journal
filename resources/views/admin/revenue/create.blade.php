@@ -49,7 +49,7 @@
                         @csrf
 
                         <div class="row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-3">
                                 <label for="frist_name">កាលបរិច្ឆេទ</label>
                                 <input id="frist_name" type="date" value="{{ old('date') }}" class="form-control"
                                     name="date" required>
@@ -57,7 +57,15 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-3">
+                                <label for="last_name">ភាគរយ</label>
+                                <input id="last_name" type="number" class="form-control" name="rate"
+                                    value="{{ old('rate') }}" autofocus required>
+                                {{-- @error('fileReference')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror --}}
+                            </div>
+                            <div class="form-group col-3">
                                 <label for="last_name">លេខលិខិត អ.ស.ហ</label>
                                 <input id="last_name" type="text" class="form-control" name="noFsa"
                                     value="{{ old('noFsa') }}" autofocus required>
@@ -65,6 +73,18 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
+                            <div class="form-group col-3">
+                                <label for="last_name">ល.រ ដីកាអម</label>
+                                <input id="last_name" type="text" class="form-control" name="orderReference"
+                                    value="{{ old('orderReference') }}" required>
+                                {{-- @error('orderReference')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror --}}
+                            </div>
+
+                        </div>
+
+                        <div class="row">
 
                             <div class="form-group col-4">
                                 <label for="last_name">ឯកសារយោង</label>
@@ -77,20 +97,8 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
-
-                        </div>
-
-                        <div class="row">
                             <div class="form-group col-4">
-                                <label for="last_name">ល.រ ដីកាអម</label>
-                                <input id="last_name" type="text" class="form-control" name="orderReference"
-                                    value="{{ old('orderReference') }}" required>
-                                {{-- @error('orderReference')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
-                            </div>
-                            <div class="form-group col-4">
-                                <label for="frist_name">កាលបរិច្ឆេទ ប័ណ្ណចំណូលនៅធនាគារ<span
+                                <label for="frist_name">ប័ណ្ណចំណូលនៅធនាគារ<span
                                         class="text-danger"><b>*</b></span></label>
                                 <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard"
                                     value="{{ old('dateOfBankIncomeCard') }}">
@@ -109,8 +117,8 @@
                             <div class="form-group col-6">
                                 <label>ឈ្មោះនិយ័តករ</label>
                                 <select name="regulatorName[]" class="form-control regulatorName">
-                                    @foreach ($regulators as $item)
-                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @foreach ($regulators as $key => $item)
+                                        <option value="{{ $key }}">{{ $item }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -148,7 +156,7 @@
     </div>
     <script>
         var regulators = {!! json_encode($regulators) !!};
-        // console.log(regulators.length)
+        // console.log(regulators)
         var btnAddInput = document.getElementById("addInput");
         var btnRemoveInput = document.getElementById("removeInput");
 
@@ -179,12 +187,19 @@
             selectInput.classList.add("form-control");
             selectInput.classList.add("regulatorName");
 
-            regulators.forEach(function(regulators) {
+            // regulators.forEach(function(index, regulators) {
+            //     var option = document.createElement("option");
+            //     option.text = regulators;
+            //     option.value = index;
+            //     selectInput.add(option);
+            // });
+
+            for (const item in regulators) {
                 var option = document.createElement("option");
-                option.text = regulators;
-                option.value = regulators;
+                option.text = regulators[item];
+                option.value = item;
                 selectInput.add(option);
-            });
+            }
 
             var labelSelectInput = document.createElement("label");
             labelSelectInput.innerHTML = "ឈ្មោះនិយ័តករ";

@@ -61,8 +61,7 @@
                                     <th style="text-align: center">កាលបរិច្ឆេទ</th>
                                     <th style="text-align: center">លេខលិខិត អ.ស.ហ</th>
                                     <th style="text-align: center">ល.រ ដីកាអម</th>
-                                    <th style="text-align: center">ប្រាក់ដុល្លា</th>
-                                    <th style="text-align: center">ប្រាក់រៀល</th>
+                                    <th style="text-align: center">ប្រាក់សរុប</th>
                                     <th style="text-align: center">ឯកសារយោង</th>
                                     <th style="text-align: center">ពិនិត្យ</th>
                                 </tr>
@@ -74,8 +73,7 @@
                                         <td style="text-align: center">{{ $item->date }}</td>
                                         <td style="text-align: center">{{ $item->noFsa }}</td>
                                         <td style="text-align: center">{{ $item->orderReference }}</td>
-                                        <td style="text-align: center">{{ $item->totalAmountDolla }} $</td>
-                                        <td style="text-align: center">{{ $item->totalAmountRiel }} ៛</td>
+                                        <td style="text-align: center">{{ $item->totalAmount }} ៛</td>
                                         <td style="text-align: center">
                                             <a href="{{ asset('files/') }}/{{ $item->file }}">
                                                 <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>

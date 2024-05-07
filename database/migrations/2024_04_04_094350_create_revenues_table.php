@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('noFsa');
             $table->string('orderReference');
             $table->date('dateOfBankIncomeCard')->nullable();
-            $table->double('totalAmountDolla')->nullable();
-            $table->double('totalAmountRiel')->nullable();
+            $table->double('totalAmount')->nullable();
+            $table->double('rate')->nullable();
+            $table->double('dollaExchangeToRiel')->nullable();
             $table->string('bank')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();

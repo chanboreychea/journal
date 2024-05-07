@@ -29,12 +29,15 @@ class RevenueController extends Controller
     {
         $request->validate([
             'date' => 'required',
+            'rate' => 'required|numeric',
             'noFsa' => 'required',
             'orderReference' => 'required',
             'regulatorName.*' => 'required',
             'fileReference' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
         ], [
             'date.required' => 'សូមបញ្ចូលនូវកាលបរិច្ឆេទ',
+            'rate.required' => 'សូមបញ្ចូលនូវភាគរយ',
+            'rate.numeric' => 'សូមបញ្ចូលភាគរយជាលេខចំនួនគត់ ឬទសភាគ',
             'noFsa.required' => 'សូមបញ្ចូលនូវលេខលិខិត អ.ស.ហ',
             'orderReference.required' => 'សូមបញ្ចូលនូវ ល.រ ដីកាអម',
             'date.required' => 'សូមបញ្ចូលនូវកាលបរិច្ឆេទ',
@@ -43,9 +46,10 @@ class RevenueController extends Controller
             'fileReference.mimes' => 'សូមបញ្ចូលឯកសារជាប្រភេទ pdf, doc, docx, xls, xlsx'
         ]);
 
+        $rate = $request->input('rate');
         $regulatorName = $request->input('regulatorName');
-        $currencyAmountDolla = $request->input('amountDolla');
-        $currencyAmountRiel = $request->input('amountRiel');
+        $amountDolla = $request->input('amountDolla');
+        $amountRiel = $request->input('amountRiel');
 
         if ($request->hasfile('fileReference')) {
             $file = $request->file('fileReference');
@@ -67,29 +71,32 @@ class RevenueController extends Controller
             $revenue = Revenue::create([
                 'date' => $request->input('date'),
                 'noFsa' => $request->input('noFsa'),
+                'rate' => $rate,
                 'orderReference' => $request->input('orderReference'),
                 'dateOfBankIncomeCard' => $request->input('dateOfBankIncomeCard'),
                 'bank' => $request->input('bank'),
                 'file' => $filename
             ]);
 
-            $totalAmountDolla = 0;
-            $totalAmountRiel = 0;
+            $totalAmount = 0;
+            $oneDolla = 4000;
             foreach ($regulatorName as $key => $item) {
+
+                $totalAmountWithRate = (($amountDolla[$key] * $oneDolla) + $amountRiel[$key]) * $rate / 100;
                 $revenues[] = [
                     'revenueId' => $revenue->id,
                     'regulatorName' => $item,
-                    'amountDolla' => $currencyAmountDolla[$key],
-                    'amountRiel' => $currencyAmountRiel[$key],
+                    'amountDolla' => $amountDolla[$key],
+                    'amountRiel' => $amountRiel[$key],
+                    'totalAmountWithRate' => $totalAmountWithRate,
                     'created_at' => Carbon::now(),
                 ];
-                $totalAmountDolla += $currencyAmountDolla[$key];
-                $totalAmountRiel += $currencyAmountRiel[$key];
+
+                $totalAmount += $totalAmountWithRate;
             }
 
             Revenue::where('id', $revenue->id)->update([
-                'totalAmountDolla' => $totalAmountDolla,
-                'totalAmountRiel' => $totalAmountRiel,
+                'totalAmount' => $totalAmount,
             ]);
 
             //insert to revenue detail
@@ -106,7 +113,8 @@ class RevenueController extends Controller
     public function show(Revenue $revenue)
     {
         $revenueDetail = RevenueDetail::where('revenueId', $revenue->id)->get();
-        return view('admin.revenue.show', compact('revenue', 'revenueDetail'));
+        $regulators = Regulator::REGULATOR;
+        return view('admin.revenue.show', compact('revenue', 'revenueDetail', 'regulators'));
     }
 
     public function edit(Revenue $revenue)
@@ -121,11 +129,14 @@ class RevenueController extends Controller
 
         $request->validate([
             'date' => 'required',
+            'rate' => 'required|numeric',
             'noFsa' => 'required',
             'orderReference' => 'required',
             'fileReference' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
         ], [
             'date.required' => 'សូមបញ្ចូលនូវកាលបរិច្ឆេទ',
+            'rate.required' => 'សូមបញ្ចូលនូវភាគរយ',
+            'rate.numeric' => 'សូមបញ្ចូលភាគរយជាលេខចំនួនគត់ ឬទសភាគ',
             'noFsa.required' => 'សូមបញ្ចូលនូវលេខលិខិត អ.ស.ហ',
             'orderReference.required' => 'សូមបញ្ចូលនូវ ល.រ ដីកាអម',
             'date.required' => 'សូមបញ្ចូលនូវកាលបរិច្ឆេទ',
@@ -138,6 +149,9 @@ class RevenueController extends Controller
         $updateRegulatorName = $request->input('updateRegulatorName');
         $updateAmountDolla = $request->input('updateAmountDolla');
         $updateAmountRiel = $request->input('updateAmountRiel');
+
+
+        $rate = $request->input('rate') ? $request->input('rate') : $revenue->rate;
 
 
         if ($request->hasFile('fileReference')) {
@@ -166,28 +180,28 @@ class RevenueController extends Controller
             $revenue->update([
                 'date' => $request->input('date'),
                 'noFsa' => $request->input('noFsa'),
+                'rate' => $rate,
                 'orderReference' => $request->input('orderReference'),
                 'dateOfBankIncomeCard' => $request->input('dateOfBankIncomeCard'),
                 'bank' => $request->input('bank'),
                 'file' => $filename
             ]);
 
-            $totalAmountDolla = 0;
-            $totalAmountRiel = 0;
-
+            $totalAmount = 0;
+            $oneDolla = 4000;
             //update revenue detail
             foreach ($updateRegulatorName as $key => $item) {
-
+                $totalAmountWithRate = (($updateAmountDolla[$key] * $oneDolla) + $updateAmountRiel[$key]) * $rate / 100;
                 RevenueDetail::where('id', $updateRevenueDetailId[$key])
                     ->update([
                         'regulatorName' => $item,
                         'amountDolla' => $updateAmountDolla[$key],
                         'amountRiel' => $updateAmountRiel[$key],
+                        'totalAmountWithRate' => $totalAmountWithRate,
                         'updated_at' => Carbon::now(),
                     ]);
 
-                $totalAmountDolla += $updateAmountDolla[$key];
-                $totalAmountRiel += $updateAmountRiel[$key];
+                $totalAmount += $totalAmountWithRate;
             }
 
             //insert new revenue detail belong to revenue
@@ -198,23 +212,25 @@ class RevenueController extends Controller
                 $currencyAmountRiel = $request->input('amountRiel');
 
                 foreach ($regulatorName as $key => $item) {
+                    $totalAmountWithRate = (($updateAmountDolla[$key] * $oneDolla) + $updateAmountRiel[$key]) * $rate / 100;
                     $revenueDetail[] = [
                         'revenueId' => $revenue->id,
                         'regulatorName' => $item,
                         'amountDolla' => $currencyAmountDolla[$key],
                         'amountRiel' => $currencyAmountRiel[$key],
+                        'totalAmountWithRate' => $totalAmountWithRate,
                         'created_at' => Carbon::now(),
                     ];
-                    $totalAmountDolla += $currencyAmountDolla[$key];
-                    $totalAmountRiel += $currencyAmountRiel[$key];
+
+                    $totalAmount += $totalAmountWithRate;
                 }
+
                 RevenueDetail::insert($revenueDetail);
             }
 
             //update revenue amount of currency
             $revenue->update([
-                'totalAmountDolla' => $totalAmountDolla,
-                'totalAmountRiel' => $totalAmountRiel,
+                'totalAmount' => $totalAmount,
             ]);
 
             DB::commit();
@@ -243,7 +259,17 @@ class RevenueController extends Controller
 
     public function destroyRevenueDetailById(Request $request, string $rdID)
     {
-        RevenueDetail::where('id', $rdID)->delete();
+        $revenueDetail = RevenueDetail::where('id', $rdID)->first();
+        $revenue = Revenue::where('id', $revenueDetail->revenueId)->first();
+
+        $totalAmount = $revenueDetail->totalAmountWithRate ? $revenue->totalAmount - $revenueDetail->totalAmountWithRate : $revenue->totalAmount;
+
+        $revenue->update([
+            'totalAmount' => $totalAmount,
+        ]);
+
+        $revenueDetail->delete();
+
         return redirect()->back()->with('message', 'លុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
 }
