@@ -8,8 +8,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-header-action">
-                        <a href="/journals" class="btn btn-danger">
-                            <i class="fas fa-chevron-left"></i>ទិនានុប្បវត្តិ
+                        <a href="/expenses" class="btn btn-danger">
+                            <i class="fas fa-chevron-left"></i>ចាកចេញ
                         </a>
                     </div>
                 </div>

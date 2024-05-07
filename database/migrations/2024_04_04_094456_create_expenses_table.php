@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('catId')->constrained('categories')->onDelete('cascade');
+            $table->string('year', 4);
+            $table->string('enity');
+            $table->string('file')->nullable();
+            $table->date('dateAdv');
+            $table->string('subAccount');
+            $table->string('clusterAct');
+            $table->double('amountAdv');
+            $table->double('remainingBal');
+            $table->text('description')->nullable();
+            $table->date('manDate');
             $table->timestamps();
         });
     }
