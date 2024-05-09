@@ -43,24 +43,21 @@
                 <div class="card-body pe-5">
                     <form method="POST" action="/expenses" enctype="multipart/form-data">
                         @csrf
-                        @php
-                            $year = date('Y');
-                        @endphp
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="year">ឆ្នាំអនុវត្ត</label>
-                                <input id="year" type="number" min="0"
-                                    value="{{ $y = old('year') ? old('year') : $year }}" class="form-control" name="year"
-                                    required>
+                                <input id="year" type="number" value="{{ old('year') }}" class="form-control"
+                                    name="year" required>
                             </div>
                             <div class="form-group col-2">
                                 <label for="enity">លេខអង្គភាព</label>
-                                <input id="enity" type="number" min="0" class="form-control" name="enity"
+                                <input id="enity" type="number" class="form-control" name="enity"
                                     value="{{ old('enity') }}" required>
                             </div>
                             <div class="form-group col-2">
                                 <label for="subAccount">អនុគណនី</label>
-                                <input id="subAccount" type="number" min="0" class="form-control" name="subAccount"
+                                <input id="subAccount" type="number" class="form-control" name="subAccount"
                                     value="{{ old('subAccount') }}">
                             </div>
                             <div class="form-group col-3">
@@ -74,7 +71,7 @@
                             </div>
                             <div class="form-group col-3">
                                 <label for="clusterAct">ចង្កោមសកម្ម</label>
-                                <input id="clusterAct" type="number" min="0" pattern="[0-9]*" class="form-control"
+                                <input id="clusterAct" type="number" pattern="[0-9]*" class="form-control"
                                     name="clusterAct" value="{{ old('clusterAct') }}">
                             </div>
                         </div>

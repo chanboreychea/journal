@@ -100,14 +100,31 @@
     @yield('message')
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
-            <div class="navbar-bg"></div>
+            <div class="navbar-bg">
+            </div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <div class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars"></i></a></li>
+
+                        <li class="d-flex align-items-center">
+                            <ol class="breadcrumb">
+                                <?php $segments = ''; ?>
+                                <li class="breadcrumb-item">
+                                    <a href="/" class="text-light">Home</a>
+                                </li>
+                                @foreach (Request::segments() as $segment)
+                                    <?php $segments .= '/' . $segment; ?>
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ $segments }}" class="text-light">{{ $segment }}</a>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </li>
                     </ul>
                 </div>
+
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown show">
                         <a href="/" data-toggle="dropdown"
@@ -141,15 +158,18 @@
                     <ul class="sidebar-menu mt-5">
                         <li class="menu-header text-center">IAUOFFSA</li>
                         <li class="dropdown active">
-                            <a href="/categories" class="nav-link"><i
-                                    class="fas fa-list-alt"></i><span>ប្រភេទ</span></a>
+                            <a href="/categories" class="nav-link">
+                                <i class="fas fa-list-alt"></i>
+                                <span>ប្រភេទ</span>
+                            </a>
                         </li>
                         <li class="dropdown active">
                             <a href="#" class="nav-link has-dropdown"><i
                                     class="fas fa-fire"></i><span>មុខងារ</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="/revenues">ចំណូល</a></li>
-                                <li><a class="nav-link" href="/expenses">ចំណាយ</a></li>
+                                <li><a class="nav-link" href="/">ចំណាយទូទៅ</a></li>
+                                <li><a class="nav-link" href="/expenses">ចំណាយថវិការជាតិ</a></li>
                                 <li><a class="nav-link" href="/journals">ទិនានុប្បវត្តិ</a></li>
                                 <li><a class="nav-link" href="/ledgers">សៀវភៅកត់ត្រា</a></li>
                             </ul>

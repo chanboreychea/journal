@@ -58,37 +58,17 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center">ល.រ</th>
-                                    <th style="text-align: center">កាលបរិច្ឆេទ</th>
-                                    <th style="text-align: center">លេខលិខិត អ.ស.ហ</th>
-                                    <th style="text-align: center">ល.រ ដីកាអម</th>
-                                    <th style="text-align: center">ប្រាក់ដុល្លា</th>
-                                    <th style="text-align: center">ប្រាក់រៀល</th>
+                                    <th style="text-align: center">ឆ្នាំអនុវត្ត</th>
+                                    <th style="text-align: center">លេខអង្គភាព</th>
+                                    <th style="text-align: center">ប្រភេទ</th>
+                                    <th style="text-align: center">អនុគណនី</th>
+                                    <th style="text-align: center">ចង្កោមសកម្ម</th>
                                     <th style="text-align: center">ឯកសារយោង</th>
                                     <th style="text-align: center">ពិនិត្យ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($revenues as $index => $item)
-                                    <tr>
-                                        <td style="text-align: center">{{ $index + 1 }}</td>
-                                        <td style="text-align: center">{{ $item->date }}</td>
-                                        <td style="text-align: center">{{ $item->noFsa }}</td>
-                                        <td style="text-align: center">{{ $item->orderReference }}</td>
-                                        <td style="text-align: center">{{ $item->totalAmountDolla }} $</td>
-                                        <td style="text-align: center">{{ $item->totalAmountRiel }} ៛</td>
-                                        <td style="text-align: center">
-                                            <a href="{{ asset('files/') }}/{{ $item->file }}">
-                                                <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>
-                                            </a>
-                                        </td>
-                                        <td style="text-align: center">
-                                            <a href="/revenues/{{ $item->id }}/edit"
-                                                class="btn btn-sm btn-primary">កែប្រែ</a>
-                                            <a href="/revenues/{{ $item->id }}"
-                                                class="btn btn-sm btn-danger">លម្អិត</a>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
+
                             </tbody>
                         </table>
                     </div>
