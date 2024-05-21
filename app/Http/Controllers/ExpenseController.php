@@ -59,20 +59,26 @@ class ExpenseController extends Controller
         $expenditureType = $request->input('expenditureType');
         $subAccount = $request->input('subAccount');
         $clusterAct = $request->input('clusterAct');
+
         $expenseGuaranteeNum = $request->input('expenseGuaranteeNum');
         $dateAdv = $request->input('dateAdv');
         $amountAdv = $request->input('amountAdv');
         $remainingBal = $request->input('remainingBal');
+
         $manDate = $request->input('manDate');
         $dateManDate = $request->input('dateManDate');
         $amountMand = $request->input('amountMand');
         $ramainingBudget = $request->input('ramainingBudget');
+
         $manDateCash = $request->input('manDateCash');
         $dateManDateCash = $request->input('dateManDateCash');
         $amountMandCash = $request->input('amountMandCash');
         $remainingBudgetCash = $request->input('remainingBudgetCash');
+
         $arrear = $request->input('arrear');
         $description = $request->input('description');
+
+        
     }
 
     public function show(Expense $expense)

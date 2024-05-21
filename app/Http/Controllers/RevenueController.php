@@ -191,28 +191,29 @@ class RevenueController extends Controller
             $oneDolla = 4000;
             //update revenue detail
             foreach ($updateRegulatorName as $key => $item) {
-                $totalAmountWithRate = (($updateAmountDolla[$key] * $oneDolla) + $updateAmountRiel[$key]) * $rate / 100;
+                $updateTotalAmountWithRate = (($updateAmountDolla[$key] * $oneDolla) + $updateAmountRiel[$key]) * $rate / 100;
                 RevenueDetail::where('id', $updateRevenueDetailId[$key])
                     ->update([
                         'regulatorName' => $item,
                         'amountDolla' => $updateAmountDolla[$key],
                         'amountRiel' => $updateAmountRiel[$key],
-                        'totalAmountWithRate' => $totalAmountWithRate,
+                        'totalAmountWithRate' => $updateTotalAmountWithRate,
                         'updated_at' => Carbon::now(),
                     ]);
 
-                $totalAmount += $totalAmountWithRate;
+                $totalAmount += $updateTotalAmountWithRate;
             }
 
             //insert new revenue detail belong to revenue
             if ($request->input('regulatorName')) {
+
                 $revenueDetail = [];
                 $regulatorName = $request->input('regulatorName');
                 $currencyAmountDolla = $request->input('amountDolla');
                 $currencyAmountRiel = $request->input('amountRiel');
 
                 foreach ($regulatorName as $key => $item) {
-                    $totalAmountWithRate = (($updateAmountDolla[$key] * $oneDolla) + $updateAmountRiel[$key]) * $rate / 100;
+                    $totalAmountWithRate = (($currencyAmountDolla[$key] * $oneDolla) + $currencyAmountRiel[$key]) * $rate / 100;
                     $revenueDetail[] = [
                         'revenueId' => $revenue->id,
                         'regulatorName' => $item,
