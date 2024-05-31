@@ -59,11 +59,11 @@
                                 <tr>
                                     <th style="text-align: center">ល.រ</th>
                                     <th style="text-align: center">កាលបរិច្ឆេទ</th>
-                                    <th style="text-align: center">លេខលិខិត អ.ស.ហ</th>
+                                    <th style="text-align: center">លេខលិខិត អ.ស.ហ.</th>
                                     <th style="text-align: center">ល.រ ដីកាអម</th>
                                     <th style="text-align: center">ប្រាក់សរុប</th>
                                     <th style="text-align: center">ឯកសារយោង</th>
-                                    <th style="text-align: center">ពិនិត្យ</th>
+                                    <th style="text-align: center">សកម្មភាព</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,9 +80,10 @@
                                             </a>
                                         </td>
                                         <td style="text-align: center">
-                                            <a href="/revenues/{{ $item->id }}/edit"
-                                                class="btn btn-sm btn-primary">កែប្រែ</a>
-                                            <a href="/revenues/{{ $item->id }}" class="btn btn-sm btn-danger">លម្អិត</a>
+                                            <a href="/revenues/{{ $item->id }}/edit" class="btn btn-sm btn-primary"><i
+                                                    class='bx bx-edit-alt'></i></a>
+                                            <a href="/revenues/{{ $item->id }}" class="btn btn-sm btn-danger"><i
+                                                    class='bx bx-show'></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

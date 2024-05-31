@@ -44,13 +44,13 @@
 
                         <div class="card card-primary card-lg">
                             <div class="card-header d-flex justify-content-center">
-                                <h4 class="text-primary">ចូលទៅកាន់ប្រព័ន្ទគ្រប់គ្រងហិរញ្ញវត្ថុ</h4>
+                                <h4 class="text-primary">ប្រព័ន្ទគ្រប់គ្រងហិរញ្ញវត្ថុ</h4>
                             </div>
                             <div class="card-body">
                                 <form method="POST" action="/admins/login" class="needs-validation" novalidate="">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="email">Admin</label>
+                                        <label for="email">អ្នកគ្រប់គ្រង</label>
                                         <input id="email" type="text" class="form-control" name="username"
                                             placeholder="Admin" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
@@ -65,7 +65,7 @@
 
                                     <div class="form-group">
                                         <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
+                                            <label for="password" class="control-label">លេខសម្ងាត់</label>
                                             {{-- <div class="float-right">
                                                 <a href="auth-forgot-password.html" class="text-small">
                                                     Forgot Password?
@@ -73,7 +73,7 @@
                                             </div> --}}
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password"
-                                            placeholder="Password" tabindex="2" required>
+                                            placeholder="********" tabindex="2" required>
                                         <div class="invalid-feedback">
                                             please fill in your password
                                         </div>
@@ -86,7 +86,7 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Login
+                                            ចូលទៅក្នុងប្រព័ន្ធ
                                         </button>
                                     </div>
                                 </form>

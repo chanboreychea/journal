@@ -24,6 +24,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 
     <script>
@@ -169,7 +171,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="/revenues">ចំណូល</a></li>
                                 <li><a class="nav-link" href="/">ចំណាយទូទៅ</a></li>
-                                <li><a class="nav-link" href="/expenses">ចំណាយថវិការជាតិ</a></li>
+                                <li><a class="nav-link" href="/expenses">ចំណាយថវិកាជាតិ</a></li>
                                 <li><a class="nav-link" href="/journals">ទិនានុប្បវត្តិ</a></li>
                                 <li><a class="nav-link" href="/ledgers">សៀវភៅកត់ត្រា</a></li>
                             </ul>

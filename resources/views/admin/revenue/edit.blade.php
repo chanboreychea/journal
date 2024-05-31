@@ -159,8 +159,8 @@
 
                                 <div class="form-group col-2 ">
                                     <label>ដកចេញ</label>
-                                    <button type="button" class="form-control btn btn-danger" data-toggle="modal"
-                                        data-target="#delete{{ $rd->id }}">លុប</button>
+                                    <button type="button" class="form-control btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#delete{{ $rd->id }}"><i class='bx bx-trash fs-5'></i></button>
                                 </div>
 
                                 <!-- Modal -->
@@ -175,11 +175,7 @@
                                                     data-dismiss="modal">ទេ</button>
                                                 <a href="/revenues/detail/{{ $rd->id }}"
                                                     class="btn btn-primary">យល់ព្រម</a>
-                                                {{-- <form action="/revenues/{{ $rd->id }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-primary">យល់ព្រម</button>
-                                                </form> --}}
+
                                             </div>
                                         </div>
                                     </div>
