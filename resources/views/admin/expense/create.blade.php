@@ -43,15 +43,13 @@
                 <div class="card-body pe-5">
                     <form method="POST" action="/expenses" enctype="multipart/form-data">
                         @csrf
-                        @php
-                            $year = date('Y');
-                        @endphp
+
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="year">ឆ្នាំអនុវត្ត</label>
                                 <input id="year" type="number" min="0"
-                                    value="{{ $y = old('year') ? old('year') : $year }}" class="form-control" name="year"
-                                    required>
+                                    value="{{ $y = old('year') ? old('year') : date('Y') }}" class="form-control"
+                                    name="year">
                             </div>
                             <div class="form-group col-2">
                                 <label for="enity">លេខអង្គភាព</label>
@@ -119,9 +117,9 @@
                                     value="{{ old('amountMand') }}">
                             </div>
                             <div class="form-group col-3">
-                                <label for="ramainingBudget">ឥណទាននៅសល់</label>
-                                <input id="ramainingBudget" type="number" class="form-control" name="ramainingBudget"
-                                    value="{{ old('ramainingBudget') }}" disabled>
+                                <label for="remainingBudget">ឥណទាននៅសល់</label>
+                                <input id="remainingBudget" type="number" class="form-control" name="remainingBudget"
+                                    value="{{ old('remainingBudget') }}" disabled>
                             </div>
                         </div>
 

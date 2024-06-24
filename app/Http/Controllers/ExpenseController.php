@@ -32,8 +32,8 @@ class ExpenseController extends Controller
             'file' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
             'discription' => 'bail|max:1000|min:2'
         ], [
-            'year.required' => 'សូមបញ្ចូលនូវឆ្នាំបច្ចុប្បន្ន',
-            'year.numeric' => 'សូមបញ្ចូលនូវឆ្នាំជាលេខ',
+            'year.required' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្ត',
+            'year.numeric' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្តជាលេខ ៤ ខ្ទង់',
             'year.regex' => 'សូមបញ្ចូលនូវឆ្នាំជាលេខ ៤ខ្ទង់',
             'enity.required' => 'សូមបញ្ចូលនូវលេខអង្គភាព',
             'enity.numeric' => 'សូមបញ្ចូលនូវលេខអង្គភាពជាលេខ',
@@ -68,7 +68,7 @@ class ExpenseController extends Controller
         $manDate = $request->input('manDate');
         $dateManDate = $request->input('dateManDate');
         $amountMand = $request->input('amountMand');
-        $ramainingBudget = $request->input('ramainingBudget');
+        $remainingBudget = $request->input('remainingBudget');
 
         $manDateCash = $request->input('manDateCash');
         $dateManDateCash = $request->input('dateManDateCash');
@@ -78,7 +78,36 @@ class ExpenseController extends Controller
         $arrear = $request->input('arrear');
         $description = $request->input('description');
 
-        
+
+        Expense::create([
+            'year' => $year,
+            'enity' => $enity,
+            'expenditureType' => $expenditureType,
+            'subAccount' => $subAccount,
+            'clusterAct' => $clusterAct,
+
+            'expenseGuaranteeNum' => $expenseGuaranteeNum,
+            'dateAdv' => $dateAdv,
+            'amountAdv' => $amountAdv,
+            'remainingBal' => $remainingBal,
+
+            'manDate' => $manDate,
+            'dateManDate' => $dateManDate,
+            'amountMand' => $amountMand,
+            'remainingBudget' => $remainingBudget,
+
+            'manDateCash' => $manDateCash,
+            'dateManDateCash' => $dateManDateCash,
+            'amountMandCash' => $amountMandCash,
+            'remainingBudgetCash' => $remainingBudgetCash,
+
+            'arrear' => $arrear,
+            'file' => $filename,
+            'description' => $description
+            
+        ]);
+
+        return redirect('/expenses')->with('message', "successfully");
     }
 
     public function show(Expense $expense)

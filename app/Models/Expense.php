@@ -27,7 +27,7 @@ class Expense extends Model
         'manDate',
         'dateManDate',
         'amountMand',
-        'ramainingBudget',
+        'remainingBudget',
 
         'manDateCash',
         'dateManDateCash',

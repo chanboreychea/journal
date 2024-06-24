@@ -31,7 +31,6 @@ class RevenueController extends Controller
             'date' => 'required',
             'rate' => 'required|numeric',
             'noFsa' => 'required',
-            'orderReference' => 'required',
             'regulatorName.*' => 'required',
             'fileReference' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
         ], [
@@ -72,7 +71,6 @@ class RevenueController extends Controller
                 'date' => $request->input('date'),
                 'noFsa' => $request->input('noFsa'),
                 'rate' => $rate,
-                'orderReference' => $request->input('orderReference'),
                 'dateOfBankIncomeCard' => $request->input('dateOfBankIncomeCard'),
                 'bank' => $request->input('bank'),
                 'file' => $filename
@@ -131,7 +129,6 @@ class RevenueController extends Controller
             'date' => 'required',
             'rate' => 'required|numeric',
             'noFsa' => 'required',
-            'orderReference' => 'required',
             'fileReference' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
         ], [
             'date.required' => 'សូមបញ្ចូលនូវកាលបរិច្ឆេទ',
@@ -181,7 +178,6 @@ class RevenueController extends Controller
                 'date' => $request->input('date'),
                 'noFsa' => $request->input('noFsa'),
                 'rate' => $rate,
-                'orderReference' => $request->input('orderReference'),
                 'dateOfBankIncomeCard' => $request->input('dateOfBankIncomeCard'),
                 'bank' => $request->input('bank'),
                 'file' => $filename
@@ -271,6 +267,6 @@ class RevenueController extends Controller
 
         $revenueDetail->delete();
 
-        return redirect()->back()->with('message', 'លុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
+        return redirect()->back()->with('message', 'ការលុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
 }

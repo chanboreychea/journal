@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->string('noFsa');
-            $table->string('orderReference');
             $table->date('dateOfBankIncomeCard')->nullable();
             $table->double('totalAmount')->nullable();
             $table->double('rate')->nullable();

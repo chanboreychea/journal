@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('manDate')->nullable(); //លេខអាណត្តិ
             $table->date('dateManDate')->nullable(); //កាលបរិច្ឆេទអាណត្តិ
             $table->double('amountMand')->nullable(); //ទឹកប្រាក់អាណត្តិ
-            $table->double('ramainingBudget')->nullable(); //ឥណទាននៅសល់
+            $table->double('remainingBudget')->nullable(); //ឥណទាននៅសល់
 
             $table->string('manDateCash')->nullable(); //លេខអាណត្តិបើកសាច់ប្រាក់
             $table->date('dateManDateCash')->nullable(); //កាលបរិច្ឆេទបើកសាច់ប្រាក់

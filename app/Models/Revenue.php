@@ -13,7 +13,7 @@ class Revenue extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     protected $fillable = [
-        'date', 'noFsa', 'orderReference', 'dateOfBankIncomeCard', 'totalAmount', 'rate', 'dollaExchangeToRiel', 'bank', 'file'
+        'date', 'noFsa', 'dateOfBankIncomeCard', 'totalAmount', 'rate', 'dollaExchangeToRiel', 'bank', 'file'
     ];
 
     public function revenueDetail()
