@@ -106,7 +106,7 @@
             </div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <div class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3">
+                    <ul class="navbar-nav mr-3 d-block d-sm-none">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars"></i></a></li>
 
@@ -169,9 +169,15 @@
                             <a href="#" class="nav-link has-dropdown"><i
                                     class="fas fa-fire"></i><span>មុខងារ</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="/revenues">ចំណូល</a></li>
-                                <li><a class="nav-link" href="/">ចំណាយទូទៅ</a></li>
-                                <li><a class="nav-link" href="/expenses">ចំណាយថវិកាជាតិ</a></li>
+                                <li><a class="nav-link" href="/revenues">ចំណូលវិភាគទាន</a></li>
+                                <li><a class="nav-link" href="/expenses">ចំណាយទូទៅ</a></li>
+                                <li class="dropdown active">
+                                    <a class="nav-link has-dropdown" href="#">ថវិកាជាតិ</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="/national/budget/revenues">ចំណូល</a></li>
+                                        <li><a class="nav-link" href="/national/budget/expenses">ចំណាយ</a></li>
+                                    </ul>
+                                </li>
                                 <li><a class="nav-link" href="/journals">ទិនានុប្បវត្តិ</a></li>
                                 <li><a class="nav-link" href="/ledgers">សៀវភៅកត់ត្រា</a></li>
                             </ul>

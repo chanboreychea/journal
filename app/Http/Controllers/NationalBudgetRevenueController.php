@@ -1,0 +1,180 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Enum\ExpenditureType;
+use Illuminate\Support\Facades\DB;
+use App\Models\NationalBudgetRevenue;
+
+class NationalBudgetRevenueController extends Controller
+{
+
+    public function index()
+    {
+        $expenditureType = ExpenditureType::EXPENDITURE_TYPE;
+        $nationalBudgetRevenue = NationalBudgetRevenue::all();
+        return view('admin.national_budget.revenue.index', compact('nationalBudgetRevenue', 'expenditureType'));
+    }
+
+
+    public function create()
+    {
+        $expenditureType = ExpenditureType::EXPENDITURE_TYPE;
+        return view('admin.national_budget.revenue.create', compact('expenditureType'));
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'year' => 'required|numeric|regex:/^[0-9]{4}$/',
+            'enity' => 'required|numeric',
+            'cash' => 'required|numeric',
+            'expenditureType' => 'required|regex:/[1-4]{1}/',
+            'subAccount' => 'required',
+            'clusterAct' => 'required',
+            'file' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
+            'note' => 'bail|max:1000'
+        ], [
+            'year.required' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្ត',
+            'year.numeric' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្តជាលេខ ៤ ខ្ទង់',
+            'year.regex' => 'សូមបញ្ចូលនូវឆ្នាំជាលេខ ៤ខ្ទង់',
+            'enity.required' => 'សូមបញ្ចូលនូវលេខអង្គភាព',
+            'enity.numeric' => 'សូមបញ្ចូលនូវលេខអង្គភាពជាលេខ',
+            'cash.required' => 'សូមបញ្ចូលទឹកប្រាក់',
+            'cash.numeric' => 'សូមបញ្ចូលទឹកប្រាក់ជាលេខអោយបានត្រឹមត្រូវ',
+            'expenditureType.required' => 'សូមជ្រើសរើសនូវប្រភេទ',
+            'subAccount.required' => 'សូមបញ្ចូលនូវលេខអនុគណនី',
+            'clusterAct.required' => 'សូមបញ្ចូលនូវលេខចង្កោមសកម្ម',
+            'file' => 'សូមបញ្ចូលអោយបានត្រឹមត្រូវ'
+        ]);
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $originalFileName = $file->getClientOriginalName();
+            $pathInfo = pathinfo($originalFileName);
+            $filename = $pathInfo['filename'] . Str::random(10) . '.' . strval($extenstion);
+            $file->move('files/', $filename);
+        } else {
+            $filename = null;
+        }
+
+        $year = $request->input('year');
+        $enity = $request->input('enity');
+        $cash = $request->input('cash');
+        $expenditureType = $request->input('expenditureType');
+        $subAccount = $request->input('subAccount');
+        $clusterAct = $request->input('clusterAct');
+        $note = $request->input('note');
+
+        NationalBudgetRevenue::create([
+            'year' => $year,
+            'enity' => $enity,
+            'expenditureType' => $expenditureType,
+            'subAccount' => $subAccount,
+            'clusterAct' => $clusterAct,
+            'cash' => $cash,
+            'note' => $note,
+            'file' => $filename
+        ]);
+
+        return redirect('/national/budget/revenues')->with('message', 'ការរក្សាទុកទទួលបានជោគជ័យ សូមអរគុណ។');
+    }
+
+
+    public function edit(NationalBudgetRevenue $revenue)
+    {
+        $expenditureType = ExpenditureType::EXPENDITURE_TYPE;
+        return view('admin.national_budget.revenue.edit', compact('revenue', 'expenditureType'));
+    }
+
+
+    public function update(Request $request, NationalBudgetRevenue $revenue)
+    {
+
+        $request->validate([
+            'year' => 'required|numeric|regex:/^[0-9]{4}$/',
+            'enity' => 'required|numeric',
+            'cash' => 'required|numeric',
+            'expenditureType' => 'required|regex:/[1-4]{1}/',
+            'subAccount' => 'required',
+            'clusterAct' => 'required',
+            'file' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
+            'note' => 'bail|max:1000'
+        ], [
+            'year.required' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្ត',
+            'year.numeric' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្តជាលេខ ៤ ខ្ទង់',
+            'year.regex' => 'សូមបញ្ចូលនូវឆ្នាំជាលេខ ៤ខ្ទង់',
+            'enity.required' => 'សូមបញ្ចូលនូវលេខអង្គភាព',
+            'enity.numeric' => 'សូមបញ្ចូលនូវលេខអង្គភាពជាលេខ',
+            'cash.required' => 'សូមបញ្ចូលទឹកប្រាក់',
+            'cash.numeric' => 'សូមបញ្ចូលទឹកប្រាក់ជាលេខអោយបានត្រឹមត្រូវ',
+            'expenditureType.required' => 'សូមជ្រើសរើសនូវប្រភេទ',
+            'subAccount.required' => 'សូមបញ្ចូលនូវលេខអនុគណនី',
+            'clusterAct.required' => 'សូមបញ្ចូលនូវលេខចង្កោមសកម្ម',
+            'file' => 'សូមបញ្ចូលអោយបានត្រឹមត្រូវ'
+        ]);
+
+        $year = $request->input('year');
+        $enity = $request->input('enity');
+        $cash = $request->input('cash');
+        $expenditureType = $request->input('expenditureType');
+        $subAccount = $request->input('subAccount');
+        $clusterAct = $request->input('clusterAct');
+        $note = $request->input('note');
+
+        if ($request->hasFile('file')) {
+
+            if ($revenue->file) {
+                if (file_exists(public_path('files/' . $revenue->file)))
+                    unlink('files/' . $revenue->file);
+            }
+
+            $file = $request->file('file');
+            $extenstion = $file->getClientOriginalExtension();
+            $originalFileName = $file->getClientOriginalName();
+            $pathInfo = pathinfo($originalFileName);
+            $filename = $pathInfo['filename'] . Str::random(10) . '.' . strval($extenstion);
+            $file->move('files/', $filename);
+        } else {
+            $filename = $revenue->file;
+        }
+
+        DB::beginTransaction();
+        try {
+
+            $revenue->update([
+                'year' => $year,
+                'enity' => $enity,
+                'expenditureType' => $expenditureType,
+                'subAccount' => $subAccount,
+                'clusterAct' => $clusterAct,
+                'cash' => $cash,
+                'note' => $note,
+                'file' => $filename
+            ]);
+
+            DB::commit();
+            return redirect('/national/budget/revenues')->with('message', 'ការធ្វើបច្ចុប្បន្នភាពបានជោគជ័យ​ សូមអរគុណ។');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/national/budget/revenues')->with('message', 'សូមព្យាយាមម្ដងទៀត សូមអរគុណ។' . "$e");
+        }
+    }
+
+
+    public function destroy(NationalBudgetRevenue $revenue)
+    {
+        if ($revenue->file) {
+            if (file_exists(public_path('files/' . $revenue->file)))
+                unlink('files/' . $revenue->file);
+        }
+
+        $revenue->delete();
+
+        return redirect('/national/budget/revenues')->with('message', 'ការលុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
+    }
+}

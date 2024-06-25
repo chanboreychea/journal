@@ -35,17 +35,16 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-header-action">
-                        <a href="/expenses/create" class="btn btn-success">កត់ចំណាយ
+                        <a href="/national/budget/expenses/create" class="btn btn-success">កត់ចំណាយ
                             <i class="fas fa-chevron-right"></i>
                         </a>
-
                     </div>
-                    {{-- <div class="div">
-                        <form action="/journals" class="d-flex justify-content-evenly align-items-center">
+                    {{-- <div class="d-flex justify-content-evenly align-items-center">
+                        <form action="/journals">
                             <label for="fromdate" class="form-label mr-2">From</label>
                             <input type="date" class="form-control mr-2" name="" id="fromdate"
                                 placeholder="កាលបរិច្ឆេទ">
-                                <label for="todate" class="form-label mr-2">To</label>
+                            <label for="todate" class="form-label mr-2">To</label>
                             <input type="date" class="form-control mr-2" name="" id="todate"
                                 placeholder="កាលបរិច្ឆេទ">
                             <input class="btn btn-primary" type="submit" value="Search">
@@ -62,12 +61,29 @@
                                     <th style="text-align: center">លេខអង្គភាព</th>
                                     <th style="text-align: center">ប្រភេទ</th>
                                     <th style="text-align: center">អនុគណនី</th>
-                                    <th style="text-align: center">ចង្កោមសកម្ម</th>
+                                    <th style="text-align: center">ចង្កោមសកម្មភាព</th>
                                     <th style="text-align: center">ឯកសារយោង</th>
                                     <th style="text-align: center">ពិនិត្យ</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($nationalBudgetExpenses as $key => $item)
+                                    <tr>
+                                        <td class="text-center">{{ $key + 1 }}</td>
+                                        <td class="text-center">{{ $item->year }}</td>
+                                        <td class="text-center">{{ $item->enity }}</td>
+                                        <td class="text-center">{{ $item->expenditureType }}</td>
+                                        <td class="text-center">{{ $item->subAccount }}</td>
+                                        <td class="text-center">{{ $item->clusterAct }}</td>
+                                        <td>{{ $item->file }}</td>
+                                        <td style="text-align: center">
+                                            <a href="/national/budget/expenses/{{ $item->id }}/edit"
+                                                class="btn btn-sm btn-primary"><i class='bx bx-edit-alt'></i></a>
+                                            <a href="/national/budget/expenses/{{ $item->id }}"
+                                                class="btn btn-sm btn-danger"><i class='bx bx-show'></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

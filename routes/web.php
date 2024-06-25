@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LedgerController;
+use App\Http\Controllers\NationalBudgetExpenseController;
+use App\Http\Controllers\NationalBudgetRevenueController;
 use App\Http\Controllers\RevenueController;
 
 Route::get('/', function () {
@@ -20,13 +22,21 @@ Route::get('/admins/logout', [AuthController::class, 'logout']);
 Route::middleware(['admin'])->group(function () {
 
     Route::resource('/categories', CategoryController::class);
+
     Route::resource('/revenues', RevenueController::class);
+    Route::get('/revenues/detail/{rdID}', [RevenueController::class, 'destroyRevenueDetailById']);
+
     Route::resource('/expenses', ExpenseController::class);
+
+    Route::resource('/national/budget/revenues', NationalBudgetRevenueController::class);
+    Route::resource('/national/budget/expenses', NationalBudgetExpenseController::class);
+
     Route::resource('/journals', JournalController::class);
     Route::resource('/ledgers', LedgerController::class);
+
     // Route::resource('/users', UserController::class);
 
-    Route::get('/revenues/detail/{rdID}', [RevenueController::class, 'destroyRevenueDetailById']);
+
 });
 
 Route::get('/accountType', function () {

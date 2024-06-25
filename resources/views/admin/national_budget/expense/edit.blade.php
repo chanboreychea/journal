@@ -35,19 +35,19 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-header-action">
-                        <a href="/expenses" class="btn btn-primary">
+                        <a href="/national/budget/expenses" class="btn btn-primary">
                             <i class="fas fa-chevron-left"></i>ចាកចេញ
                         </a>
                     </div>
                 </div>
                 <div class="card-body pe-5">
-                    <form method="POST" action="/expenses" enctype="multipart/form-data">
+                    <form method="POST" action="/national/budget/expenses" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <div class="row">
                             <div class="form-group col-2">
                                 <label for="year">ឆ្នាំអនុវត្ត</label>
-                                <input id="year" type="number" value="{{ old('year') }}" class="form-control"
+                                <input id="year" type="number" value="{{ $expense->year }}" class="form-control"
                                     name="year" required>
                             </div>
                             <div class="form-group col-2">
@@ -70,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-3">
-                                <label for="clusterAct">ចង្កោមសកម្ម</label>
+                                <label for="clusterAct">ចង្កោមសកម្មភាព</label>
                                 <input id="clusterAct" type="number" pattern="[0-9]*" class="form-control"
                                     name="clusterAct" value="{{ old('clusterAct') }}">
                             </div>
