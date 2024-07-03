@@ -55,7 +55,7 @@
                 <div class="card-body p-0">
                     <div class="table-responsive table-invoice">
                         <table class="table table-sm table-bordered">
-                            <thead>
+                            <thead class="bg-secondary">
                                 <tr>
                                     <th style="text-align: center">ល.រ</th>
                                     <th style="text-align: center">ឆ្នាំអនុវត្ត</th>
@@ -71,20 +71,20 @@
                             <tbody>
                                 @foreach ($nationalBudgetRevenue as $index => $item)
                                     <tr>
-                                        <td style="text-align: center">{{ $index + 1 }}</td>
-                                        <td style="text-align: center">{{ $item->year }}</td>
-                                        <td style="text-align: center">{{ $item->enity }}</td>
-                                        <td style="text-align: center">
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td class="text-center">{{ $item->year }}</td>
+                                        <td class="text-center">{{ $item->enity }}</td>
+                                        <td class="text-center">
                                             @foreach ($expenditureType as $key => $type)
                                                 @if ($item->expenditureType == $key)
                                                     {{ $type }}
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td style="text-align: center">{{ $item->clusterAct }}</td>
-                                        <td style="text-align: center">{{ $item->subAccount }}</td>
-                                        <td style="text-align: center">{{ $item->cash }} ៛</td>
-                                        <td style="text-align: center">
+                                        <td class="text-center">{{ $item->clusterAct }}</td>
+                                        <td class="text-center">{{ $item->subAccount }}</td>
+                                        <td class="text-center currency-riel">{{ $item->cash }}</td>
+                                        <td class="text-center">
                                             @if ($item->file)
                                                 <a href="{{ asset('files/') }}/{{ $item->file }}">
                                                     <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>
@@ -95,7 +95,7 @@
                                             @endif
 
                                         </td>
-                                        <td style="text-align: center">
+                                        <td class="text-center">
                                             <a href="/national/budget/revenues/{{ $item->id }}/edit"
                                                 class="btn btn-sm btn-primary"><i class='bx bx-edit-alt'></i></a>
                                             <button class="btn btn-danger btn-sm" data-toggle="modal"

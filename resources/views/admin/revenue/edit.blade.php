@@ -50,36 +50,27 @@
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <div class="row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="frist_name">កាលបរិច្ឆេទ</label>
                                 <input id="frist_name" type="date" value="{{ $revenue->date }}" class="form-control"
                                     name="date" required>
-                                {{-- @error('date')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">ភាគរយ</label>
                                 <input id="last_name" type="number" class="form-control" name="rate"
                                     value="{{ $revenue->rate }}" required>
-                                {{-- @error('fileReference')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">លេខលិខិត អ.ស.ហ</label>
                                 <input id="last_name" type="text" class="form-control" name="noFsa"
                                     value="{{ $revenue->noFsa }}" autofocus required>
-                                {{-- @error('noFsa')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
 
                         </div>
 
                         <div class="row">
 
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">ឯកសារយោង</label>
                                 <div class="custom-file">
                                     <input type="file" name="fileReference" class="custom-file-input" id="customFile">
@@ -90,13 +81,13 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="frist_name">កាលបរិច្ឆេទ ប័ណ្ណចំណូលនៅធនាគារ<span
                                         class="text-danger"><b>*</b></span></label>
                                 <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard"
                                     value="{{ $revenue->dateOfBankIncomeCard }}">
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="bank">ABA<span class="text-danger"><b>*</b></span></label>
                                 <input id="bank" type="text" class="form-control" name="bank"
                                     value="{{ $revenue->bank }}" placeholder="ABA">
@@ -110,7 +101,7 @@
                             <input type="hidden" name="updateRevenueDetailId[]" value="{{ $rd->id }}">
 
                             <div class="row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-lg-4 col-sm-12">
                                     <label>ឈ្មោះនិយ័តករ</label>
                                     <select name="updateRegulatorName[]" class="form-control regulatorName">
 
@@ -127,7 +118,7 @@
 
                                     </select>
                                 </div>
-                                <div class="form-group col-6 d-flex justify-content-between">
+                                <div class="form-group col-lg-4 col-sm-12 d-flex justify-content-between">
                                     <div class="w-100 mr-2">
                                         <label>ប្រាក់ដុល្លា</label>
                                         <input type="text" value="{{ $rd->amountDolla }}"
@@ -148,10 +139,11 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-2 ">
+                                <div class="form-group col-lg-2">
                                     <label>ដកចេញ</label>
                                     <button type="button" class="form-control btn btn-danger btn-sm" data-toggle="modal"
-                                        data-target="#delete{{ $rd->id }}"><i class='bx bx-trash fs-5'></i></button>
+                                        data-target="#delete{{ $rd->id }}"><i
+                                            class='bx bx-trash fs-5'></i></button>
                                 </div>
 
                                 <!-- Modal -->
@@ -240,13 +232,13 @@
             row.className = 'row items';
 
             var colRight = document.createElement('div');
-            colRight.className = 'form-group col-6';
+            colRight.className = 'form-group col-lg-6 col-sm-12';
 
             colRight.appendChild(labelSelectInput);
             colRight.appendChild(selectInput);
 
             var colLeft = document.createElement('div');
-            colLeft.className = 'form-group col-6 d-flex justify-content-between';
+            colLeft.className = 'form-group col-lg-6 col-sm-12 d-flex justify-content-between';
 
             var colLeftDolla = document.createElement('div');
             colLeftDolla.className = "w-100 mr-2"
@@ -290,6 +282,5 @@
                 btnAddInput.disabled = false;
             }
         }
-
     </script>
 @endsection

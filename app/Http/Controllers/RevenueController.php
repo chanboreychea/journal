@@ -242,7 +242,6 @@ class RevenueController extends Controller
     {
 
         if ($revenue->file) {
-            //find iamge file in public/images directory
             if (file_exists(public_path('files/' . $revenue->file)))
                 unlink('files/' . $revenue->file);
         }

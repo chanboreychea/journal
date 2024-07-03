@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('year', 4); //ឆ្នាំអនុវត្ត
             $table->string('enity'); //លេខអង្គភាព
             $table->string('expenditureType'); //ប្រភេទ
-            $table->string('clusterAct'); //ចង្កោមសកម្ម
+            $table->string('clusterAct')->unique(); //ចង្កោមសកម្ម
             $table->string('subAccount'); //អនុគណនី
             $table->double('cash');
             $table->text('note')->nullable();

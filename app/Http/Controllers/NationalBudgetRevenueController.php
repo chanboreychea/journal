@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Enum\ExpenditureType;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\NationalBudgetRevenue;
 
@@ -31,10 +32,10 @@ class NationalBudgetRevenueController extends Controller
         $request->validate([
             'year' => 'required|numeric|regex:/^[0-9]{4}$/',
             'enity' => 'required|numeric',
-            'cash' => 'required|numeric',
+            'cash' => 'required',
             'expenditureType' => 'required|regex:/[1-4]{1}/',
             'subAccount' => 'required',
-            'clusterAct' => 'required',
+            'clusterAct' => ['required', Rule::unique('national_budget_revenues', 'clusterAct')],
             'file' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
             'note' => 'bail|max:1000'
         ], [
@@ -64,7 +65,7 @@ class NationalBudgetRevenueController extends Controller
 
         $year = $request->input('year');
         $enity = $request->input('enity');
-        $cash = $request->input('cash');
+        $cash = str_replace(',', '', $request->input('cash'));
         $expenditureType = $request->input('expenditureType');
         $subAccount = $request->input('subAccount');
         $clusterAct = $request->input('clusterAct');
@@ -98,10 +99,10 @@ class NationalBudgetRevenueController extends Controller
         $request->validate([
             'year' => 'required|numeric|regex:/^[0-9]{4}$/',
             'enity' => 'required|numeric',
-            'cash' => 'required|numeric',
+            'cash' => 'required',
             'expenditureType' => 'required|regex:/[1-4]{1}/',
             'subAccount' => 'required',
-            'clusterAct' => 'required',
+            'clusterAct' => ['required', Rule::unique('national_budget_revenues', 'clusterAct')->whereNot('id', $revenue->id)],
             'file' => 'file|mimes:pdf,doc,docx,xls,xlsx|max:25480',
             'note' => 'bail|max:1000'
         ], [
@@ -109,7 +110,6 @@ class NationalBudgetRevenueController extends Controller
             'year.numeric' => 'សូមបញ្ចូលនូវឆ្នាំអនុវត្តជាលេខ ៤ ខ្ទង់',
             'year.regex' => 'សូមបញ្ចូលនូវឆ្នាំជាលេខ ៤ខ្ទង់',
             'enity.required' => 'សូមបញ្ចូលនូវលេខអង្គភាព',
-            'enity.numeric' => 'សូមបញ្ចូលនូវលេខអង្គភាពជាលេខ',
             'cash.required' => 'សូមបញ្ចូលទឹកប្រាក់',
             'cash.numeric' => 'សូមបញ្ចូលទឹកប្រាក់ជាលេខអោយបានត្រឹមត្រូវ',
             'expenditureType.required' => 'សូមជ្រើសរើសនូវប្រភេទ',
@@ -120,7 +120,7 @@ class NationalBudgetRevenueController extends Controller
 
         $year = $request->input('year');
         $enity = $request->input('enity');
-        $cash = $request->input('cash');
+        $cash = str_replace(',', '', $request->input('cash'));
         $expenditureType = $request->input('expenditureType');
         $subAccount = $request->input('subAccount');
         $clusterAct = $request->input('clusterAct');
@@ -168,12 +168,12 @@ class NationalBudgetRevenueController extends Controller
 
     public function destroy(NationalBudgetRevenue $revenue)
     {
-        if ($revenue->file) {
-            if (file_exists(public_path('files/' . $revenue->file)))
-                unlink('files/' . $revenue->file);
-        }
+        // if ($revenue->file) {
+        //     if (file_exists(public_path('files/' . $revenue->file)))
+        //         unlink('files/' . $revenue->file);
+        // }
 
-        $revenue->delete();
+        // $revenue->delete();
 
         return redirect('/national/budget/revenues')->with('message', 'ការលុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }

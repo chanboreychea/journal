@@ -1,6 +1,6 @@
 @extends('template.master')
 
-@section('title', 'ចំណាយ')
+@section('title', 'ចំណាយថវិកាជាតិ')
 
 @section('message')
     @if ($message = Session::get('message'))
@@ -35,7 +35,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-header-action">
-                        <a href="/national/budget/expenses/create" class="btn btn-success">កត់ចំណាយ
+                        <a href="/national/budget/expenses/create" class="btn btn-success">កត់ចំណាយថវិកាជាតិ
                             <i class="fas fa-chevron-right"></i>
                         </a>
                     </div>
@@ -54,16 +54,19 @@
                 <div class="card-body p-0">
                     <div class="table-responsive table-invoice">
                         <table class="table table-sm table-bordered">
-                            <thead>
+                            <thead class="bg-secondary">
                                 <tr>
-                                    <th style="text-align: center">ល.រ</th>
-                                    <th style="text-align: center">ឆ្នាំអនុវត្ត</th>
-                                    <th style="text-align: center">លេខអង្គភាព</th>
-                                    <th style="text-align: center">ប្រភេទ</th>
-                                    <th style="text-align: center">អនុគណនី</th>
-                                    <th style="text-align: center">ចង្កោមសកម្មភាព</th>
-                                    <th style="text-align: center">ឯកសារយោង</th>
-                                    <th style="text-align: center">ពិនិត្យ</th>
+                                    <th class="text-center">ល.រ</th>
+                                    <th class="text-center">ឆ្នាំអនុវត្ត</th>
+                                    <th class="text-center">លេខអង្គភាព</th>
+                                    <th class="text-center">ប្រភេទ</th>
+                                    <th class="text-center">អនុគណនី</th>
+                                    <th class="text-center">ចង្កោមសកម្មភាព</th>
+                                    <th class="text-center">ទឹកប្រាក់ធានា</th>
+                                    <th class="text-center">ទឹកប្រាក់អាណត្តិ</th>
+                                    <th class="text-center">ទឹកប្រាក់បានបើក</th>
+                                    <th class="text-center">ឯកសារយោង</th>
+                                    <th class="text-center">ពិនិត្យ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,10 +75,29 @@
                                         <td class="text-center">{{ $key + 1 }}</td>
                                         <td class="text-center">{{ $item->year }}</td>
                                         <td class="text-center">{{ $item->enity }}</td>
-                                        <td class="text-center">{{ $item->expenditureType }}</td>
+                                        <td class="text-center">
+                                            @foreach ($expenditureType as $i => $type)
+                                                @if ($item->expenditureType == $i)
+                                                    {{ $type }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td class="text-center">{{ $item->subAccount }}</td>
                                         <td class="text-center">{{ $item->clusterAct }}</td>
-                                        <td>{{ $item->file }}</td>
+                                        <td class="text-left currency-riel">{{ $item->amountAdv }}</td>
+                                        <td class="text-left currency-riel">{{ $item->amountMand }}</td>
+                                        <td class="text-left currency-riel">{{ $item->amountMandCash }}</td>
+                                        <td class="text-center">
+                                            @if ($item->file)
+                                                <a href="{{ asset('files/') }}/{{ $item->file }}">
+                                                    <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>
+                                                </a>
+                                            @else
+                                                <i class="fa fa-file-text-o disabled-hover"
+                                                    style="font-size:20px;color:rgb(0, 0, 0)"></i>
+                                            @endif
+
+                                        </td>
                                         <td style="text-align: center">
                                             <a href="/national/budget/expenses/{{ $item->id }}/edit"
                                                 class="btn btn-sm btn-primary"><i class='bx bx-edit-alt'></i></a>

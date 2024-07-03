@@ -55,29 +55,35 @@
                 <div class="card-body p-0">
                     <div class="table-responsive table-invoice">
                         <table class="table table-sm table-bordered">
-                            <thead>
+                            <thead class="bg-secondary">
                                 <tr>
-                                    <th style="text-align: center">ល.រ</th>
-                                    <th style="text-align: center">កាលបរិច្ឆេទ</th>
-                                    <th style="text-align: center">លេខលិខិត អ.ស.ហ.</th>
-                                    <th style="text-align: center">ប្រាក់សរុប</th>
-                                    <th style="text-align: center">ឯកសារយោង</th>
-                                    <th style="text-align: center">សកម្មភាព</th>
+                                    <th class="text-center">ល.រ</th>
+                                    <th class="text-center">កាលបរិច្ឆេទ</th>
+                                    <th class="text-center">លេខលិខិត អ.ស.ហ.</th>
+                                    <th class="text-center">ប្រាក់សរុប</th>
+                                    <th class="text-center">ឯកសារយោង</th>
+                                    <th class="text-center">សកម្មភាព</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($revenues as $index => $item)
                                     <tr>
-                                        <td style="text-align: center">{{ $index + 1 }}</td>
-                                        <td style="text-align: center">{{ $item->date }}</td>
-                                        <td style="text-align: center">{{ $item->noFsa }}</td>
-                                        <td style="text-align: center">{{ $item->totalAmount }} ៛</td>
-                                        <td style="text-align: center">
-                                            <a href="{{ asset('files/') }}/{{ $item->file }}">
-                                                <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>
-                                            </a>
+                                        <td class="text-center">{{ $index + 1 }}</td>
+                                        <td class="text-center">{{ $item->date }}</td>
+                                        <td class="text-center">{{ $item->noFsa }}</td>
+                                        <td class="text-center currency-riel">{{ $item->totalAmount }}</td>
+                                        <td class="text-center">
+                                            @if ($item->file)
+                                                <a href="{{ asset('files/') }}/{{ $item->file }}">
+                                                    <i class="fa fa-file-text-o" style="font-size:20px;color:red"></i>
+                                                </a>
+                                            @else
+                                                <i class="fa fa-file-text-o disabled-hover"
+                                                    style="font-size:20px;color:rgb(0, 0, 0)"></i>
+                                            @endif
+
                                         </td>
-                                        <td style="text-align: center">
+                                        <td class="text-center">
                                             <a href="/revenues/{{ $item->id }}/edit" class="btn btn-sm btn-primary"><i
                                                     class='bx bx-edit-alt'></i></a>
                                             <a href="/revenues/{{ $item->id }}" class="btn btn-sm btn-danger"><i

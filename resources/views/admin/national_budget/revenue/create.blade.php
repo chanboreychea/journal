@@ -45,31 +45,31 @@
                         @csrf
 
                         <div class="row">
-                            <div class="form-group col-lg-2 col-sm-4">
+                            <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                 <label for="year">ឆ្នាំអនុវត្ត</label>
                                 <input id="year" type="number" min="0"
                                     value="{{ $y = old('year') ? old('year') : date('Y') }}" class="form-control"
                                     name="year">
                             </div>
-                            <div class="form-group col-lg-2 col-sm-4">
+                            <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                 <label for="enity">លេខអង្គភាព</label>
                                 <input id="enity" type="number" min="0" class="form-control" name="enity"
                                     value="{{ old('enity') }}" required>
                             </div>
-                            <div class="form-group col-lg-2 col-sm-4">
-                                <label for="cash">ទឹកប្រាក់រៀល</label>
-                                <input id="cash" type="number" min="0" class="form-control" name="cash"
-                                    value="{{ old('cash') }}" required>
-                            </div>
-                            <div class="form-group col-lg-3 col-sm-6">
+                            <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                 <label for="subAccount">អនុគណនី</label>
                                 <input id="subAccount" type="number" min="0" class="form-control" name="subAccount"
                                     value="{{ old('subAccount') }}">
                             </div>
-                            <div class="form-group col-lg-3 col-sm-6">
+                            <div class="form-group col-lg-2 col-md-6 col-sm-12">
                                 <label for="clusterAct">ចង្កោមសកម្មភាព</label>
                                 <input id="clusterAct" type="number" min="0" pattern="[0-9]*" class="form-control"
                                     name="clusterAct" value="{{ old('clusterAct') }}">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="cash">ទឹកប្រាក់រៀល</label>
+                                <input id="cash" type="text" class="form-control formatted-currency" name="cash"
+                                    value="{{ old('cash') }}" required>
                             </div>
                         </div>
 

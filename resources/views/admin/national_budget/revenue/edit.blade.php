@@ -58,20 +58,21 @@
                                 <input id="enity" type="number" min="0" class="form-control" name="enity"
                                     value="{{ $revenue->enity }}">
                             </div>
-                            <div class="form-group col-lg-2 col-sm-4">
-                                <label for="cash">ទឹកប្រាក់រៀល</label>
-                                <input id="cash" type="number" min="0" class="form-control" name="cash"
-                                    value="{{ $revenue->cash }}">
-                            </div>
-                            <div class="form-group col-lg-3 col-sm-6">
+
+                            <div class="form-group col-lg-2 col-sm-6">
                                 <label for="subAccount">អនុគណនី</label>
                                 <input id="subAccount" type="number" min="0" class="form-control" name="subAccount"
                                     value="{{ $revenue->subAccount }}">
                             </div>
-                            <div class="form-group col-lg-3 col-sm-6">
+                            <div class="form-group col-lg-2 col-sm-6">
                                 <label for="clusterAct">ចង្កោមសកម្មភាព</label>
                                 <input id="clusterAct" type="number" min="0" pattern="[0-9]*" class="form-control"
                                     name="clusterAct" value="{{ $revenue->clusterAct }}">
+                            </div>
+                            <div class="form-group col-lg-4 col-sm-4">
+                                <label for="cash">ទឹកប្រាក់រៀល</label>
+                                <input id="cash" name="cash" type="text" min="0"
+                                    class="form-control formatted-currency" value="{{ $revenue->cash }}">
                             </div>
                         </div>
 
@@ -114,5 +115,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            formatAmount('cash');
+        });
+
+        function formatAmount(inputName) {
+            var amountInput = $(`input[name="${ inputName }"]`);
+            var currentVal = amountInput.val();
+            console.log(currentVal);
+            var cleanedInput = currentVal.replace(/[^\d.-]/g, '');
+            let formattedInput = formatCurrency(cleanedInput);
+            amountInput.val(formattedInput);
+        }
+    </script>
 
 @endsection

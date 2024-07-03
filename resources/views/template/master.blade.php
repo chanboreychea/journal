@@ -24,6 +24,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -94,6 +97,10 @@
             padding: 0.75rem;
             word-wrap: break-word;
         }
+
+        .formatted-number {
+            text-align: right;
+        }
     </style>
 
 </head>
@@ -104,13 +111,15 @@
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg">
             </div>
+
             <nav class="navbar navbar-expand-lg main-navbar">
+
                 <div class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3 d-block d-sm-none">
+                    <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
                                     class="fas fa-bars"></i></a></li>
 
-                        <li class="d-flex align-items-center">
+                        {{-- <li class="d-none d-md-block d-sm-block ">
                             <ol class="breadcrumb">
                                 <?php $segments = ''; ?>
                                 <li class="breadcrumb-item">
@@ -123,7 +132,7 @@
                                     </li>
                                 @endforeach
                             </ol>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
 
@@ -134,19 +143,11 @@
                             <img alt="image" src="{{ asset('assets/img/admin.jpg') }}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">លោក​ ថៅ គីមរ៉ុង</div>
                         </a>
-                        {{-- <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/admins/logout" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div> --}}
                     </li>
                 </ul>
+
             </nav>
+
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand p-3">
@@ -366,6 +367,77 @@
         setTimeout(function() {
             $('#success-alert, #error-alert').fadeOut('slow');
         }, 8000);
+
+
+        $(document).ready(function() {
+
+            $('.formatted-currency').on('keyup', function() {
+
+                let inputVal = $(this).val();
+                let cleanedInput = inputVal.replace(/[^\d.-]/g, '');
+
+                let formattedInput = formatCurrency(cleanedInput);
+                $(this).val(formattedInput);
+
+            });
+
+            $('.currency-riel').each(function() {
+                let text = $(this).text();
+                let num = parseFloat(text);
+
+                if (!isNaN(num)) {
+                    let formattedNum = num.toLocaleString('km-KH', {
+                        style: 'currency',
+                        currency: 'KHR'
+                    });
+                    $(this).text(formattedNum);
+                }
+            });
+
+            $('.currency-dolla').each(function() {
+                let text = $(this).text();
+                let num = parseFloat(text);
+
+                if (!isNaN(num)) {
+                    let formattedNum = num.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    });
+                    $(this).text(formattedNum);
+                }
+            });
+
+            formatAmount('amountAdv');
+            formatAmount('amountMand');
+            formatAmount('amountMandCash');
+
+            formatAmount('cash');
+
+
+        });
+
+        function formatAmount(inputName) {
+            var amountInput = $(`input[name="${ inputName }"]`);
+            var currentVal = amountInput.val();
+            console.log(currentVal);
+            var cleanedInput = currentVal.replace(/[^\d.-]/g, '');
+            let formattedInput = formatCurrency(cleanedInput);
+            amountInput.val(formattedInput);
+        }
+
+        function formatCurrency(value) {
+            if (value === '') return '';
+
+            // Split the value into integer and decimal parts
+            let parts = value.split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts.length > 1 ? '.' + parts[1] : '';
+
+            // Add commas to the integer part using regex
+            integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            return integerPart + decimalPart;
+        }
     </script>
 </body>
 

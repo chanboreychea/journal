@@ -38,9 +38,9 @@
                         <a href="/revenues" class="btn btn-primary">
                             <i class="fas fa-chevron-left"></i>ចាកចេញ
                         </a>
-                        <button type="button" id="addInput" class="btn btn-success"
+                        <button type="button" id="addInput" class="btn btn-success btn-sm"
                             onclick="addInput()">ប្រភពចំណូល</button>
-                        <button type="button" id="removeInput" class="btn btn-danger" disabled
+                        <button type="button" id="removeInput" class="btn btn-danger btn-sm" disabled
                             onclick="removeInput()">ដកប្រភពចំណូល</button>
                     </div>
                 </div>
@@ -49,53 +49,39 @@
                         @csrf
 
                         <div class="row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="frist_name">កាលបរិច្ឆេទ</label>
                                 <input id="frist_name" type="date" value="{{ old('date') }}" class="form-control"
                                     name="date" required>
-                                {{-- @error('date')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">ភាគរយ</label>
-                                <input id="last_name" type="number" class="form-control" name="rate"
+                                <input id="last_name" type="number" class="form-control" name="rate" min="0"
                                     value="{{ old('rate') }}" autofocus required>
-                                {{-- @error('fileReference')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">លេខលិខិត អ.ស.ហ</label>
-                                <input id="last_name" type="text" class="form-control" name="noFsa"
+                                <input id="last_name" type="text" class="form-control" name="noFsa" min="0"
                                     value="{{ old('noFsa') }}" autofocus required>
-                                {{-- @error('noFsa')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
 
                         </div>
 
                         <div class="row">
-
-                            <div class="form-group col-4">
+                            <div class="form-group col-lg-4 col-sm-12">
                                 <label for="last_name">ឯកសារយោង</label>
                                 <div class="custom-file">
                                     <input type="file" name="fileReference" class="custom-file-input" id="customFile">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
-                                {{-- <input type="file" name="fileReference"> --}}
-                                {{-- @error('fileReference')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
                             </div>
-                            <div class="form-group col-4">
-                                <label for="frist_name">ប័ណ្ណចំណូលនៅធនាគារ<span class="text-danger"><b>*</b></span></label>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="frist_name">ប័ណ្ណចំណូលនៅធនាគារ</label>
                                 <input id="frist_name" type="date" class="form-control" name="dateOfBankIncomeCard"
                                     value="{{ old('dateOfBankIncomeCard') }}">
                             </div>
-                            <div class="form-group col-4">
-                                <label for="bank">ABA<span class="text-danger"><b>*</b></span></label>
+                            <div class="form-group col-lg-4 col-sm-12">
+                                <label for="bank">ABA</label>
                                 <input id="bank" type="text" class="form-control" name="bank"
                                     value="{{ old('bank') }}" placeholder="ABA">
                                 @error('bank')
@@ -105,7 +91,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-6">
+                            <div class="form-group col-lg-6 col-sm-12">
                                 <label>ឈ្មោះនិយ័តករ</label>
                                 <select name="regulatorName[]" class="form-control regulatorName">
                                     @foreach ($regulators as $key => $item)
@@ -113,7 +99,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-6 d-flex justify-content-between">
+                            <div class="form-group col-lg-6 col-sm-12 d-flex justify-content-between">
                                 <div class="w-100 mr-2">
                                     <label>ប្រាក់ដុល្លា</label>
                                     <input type="text" class="form-control amountDolla" name="amountDolla[]"
@@ -201,13 +187,13 @@
             row.className = 'row items';
 
             var colRight = document.createElement('div');
-            colRight.className = 'form-group col-6';
+            colRight.className = 'form-group col-lg-6 col-sm-12';
 
             colRight.appendChild(labelSelectInput);
             colRight.appendChild(selectInput);
 
             var colLeft = document.createElement('div');
-            colLeft.className = 'form-group col-6 d-flex justify-content-between';
+            colLeft.className = 'form-group col-lg-6 col-sm-12 d-flex justify-content-between';
 
             var colLeftDolla = document.createElement('div');
             colLeftDolla.className = "w-100 mr-2"
